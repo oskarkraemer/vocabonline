@@ -23,4 +23,7 @@ public class List {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "timestamptz default now()")
     private Date created_at;
+
+    @Column
+    private long translation_amount;
 }

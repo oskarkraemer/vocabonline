@@ -3,6 +3,7 @@ import AppLayout from "./AppLayout";
 import { WordsTable } from "./WordsTable";
 import { Button } from "./components/ui/button";
 
+import api from './api/axiosConfig';
 
 export default function ListPage() {
   const { listId } = useParams();

@@ -8,6 +8,8 @@ import { Switch } from "./components/ui/switch";
 import { Label } from "./components/ui/label";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
 
+import api from './api/axiosConfig';
+
 export default function LearnPage() {
   type Translation = {
     id: number;
@@ -29,18 +31,36 @@ export default function LearnPage() {
 
   const [progress, setProgress] = useState(0);
 
+  const getTranslations = async () => {
+    try {
+      return await api.get(`/api/v1/translations/${listId}`).then((response) => {
+        console.log("Fetched translations:");
+        console.log(response.data);
+
+        setTranslations(response.data);
+        return response.data;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   //Shuffle the translations
   useEffect(() => {
-    console.log("Shuffling translations...");
+    console.log("Fetching translations...");
+    getTranslations().then((response_translations: Translation[]) => {
 
-    setProgress(0);
+      console.log("Shuffling translations...");
 
-    const shuffeled = translations.sort(() => Math.random() - 0.5);
-    setTranslations(shuffeled);
+      setProgress(0);
 
-    setCurrentTranslation(shuffeled[0]);
+      const shuffeled = response_translations.sort(() => Math.random() - 0.5);
+      setTranslations(shuffeled);
 
-    console.log(shuffeled);
+      setCurrentTranslation(shuffeled[0]);
+
+      console.log(shuffeled);
+    });
   }, []);
 
   function handleFlip(flipped: boolean) {
