@@ -10,18 +10,14 @@ import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { Skeleton } from "./components/ui/skeleton";
 
 import api from './api/axiosConfig';
+import { Translation } from "./types";
 
 export default function LearnPage() {
-  type Translation = {
-    id: number;
-    english: string;
-    german: string;
-  }
 
   const { listId } = useParams();
   const [listName, setListName] = useState();
 
-  const [translations, setTranslations] = useState<Translation[]>([{id: 0, english: "tree", german: "Baum"}, {id: 1, english: "cat", german: "Katze"}, {id: 2, english: "fish", german: "Fisch"}]);
+  const [translations, setTranslations] = useState<Translation[]>([]);
 
   const [currentTranslation, setCurrentTranslation] = useState<Translation>();
   const [flipped, setFlipped] = useState(false);

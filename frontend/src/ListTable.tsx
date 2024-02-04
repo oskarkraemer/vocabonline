@@ -10,24 +10,12 @@ import {
 import { Button } from "./components/ui/button"
 import { Badge } from "./components/ui/badge"
 import { useNavigate } from "react-router-dom";
+import { List } from "./types";
   
-  const lists = [
-    {
-      id: "1",
-      name: "The Road",
-      wordAmount: "46",
-      dateAdded: "13.01.24",
-    },
-    {
-        id: "2",
-        name: "The Road",
-        wordAmount: "46",
-        dateAdded: "13.01.24",
-      },
-  ]
-  
-  export function ListTable() {
+  export function ListTable(props: { lists: List[] }) {
     const navigate = useNavigate();
+
+    const lists = props.lists;
 
     return (
       <Table>
@@ -47,14 +35,14 @@ import { useNavigate } from "react-router-dom";
                 className="cursor-pointer"
             >
                 <TableCell className="font-medium">{list.id}</TableCell>
-                <TableCell>
+                <TableCell className="min-w-[100px]">
                     <Badge variant="default" className="mr-2">
                         New
                     </Badge>
                     {list.name}
                 </TableCell>
-                <TableCell>{list.wordAmount}</TableCell>
-                <TableCell>{list.dateAdded}</TableCell>
+                <TableCell>{list.translation_amount}</TableCell>
+                <TableCell>{new Date(list.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })}</TableCell>
                 <TableCell className="text-right">
                     <Button variant="default">Learn</Button>
                 </TableCell>

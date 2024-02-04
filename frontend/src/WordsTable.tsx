@@ -10,24 +10,12 @@ import {
 import { Button } from "./components/ui/button"
 import { Badge } from "./components/ui/badge"
 import { useNavigate } from "react-router-dom";
+import { Translation } from "./types";
   
-  const translations = [
-    {
-      id: "1",
-      english: "tree",
-      german: "Baum",
-      synonyms: ["forest", "wood"],
-    },
-    {
-      id: "2",
-      english: "cat",
-      german: "Katze",
-      synonyms: ["kitty"],
-    },
-  ]
-  
-  export function WordsTable() {
+  export function WordsTable(props: { translations: Translation[] }) {
     const navigate = useNavigate();
+
+    const translations = props.translations;
 
     return (
       <Table>

@@ -1,23 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppLayout from "./AppLayout";
 import { ListTable } from "./ListTable";
 
 import api from './api/axiosConfig';
+import { List } from "./types";
 
 export default function Dashboard() {
-  type List = {
-    id: number;
-    name: string;
-    translation_amount: number;
-    dateAdded: Date;
-  }
 
-  const [lists, setLists] = useState<List>();
+  const [lists, setLists] = useState<List[]>([]);
 
   const getLists = async () => {
     try {
       return await api.get(`/api/v1/lists`).then((response) => {
-        console.log("Fetched lists:");
         console.log(response.data);
 
         setLists(response.data);
@@ -27,6 +21,11 @@ export default function Dashboard() {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    console.log("Fetching lists...");
+    getLists();
+  }, []);
   
   return (
     <AppLayout>
@@ -37,7 +36,7 @@ export default function Dashboard() {
 
         <div className="mt-8" />
 
-        <ListTable />
+        <ListTable lists={lists}/>
     </AppLayout>
   )
 }
