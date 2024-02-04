@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Switch } from "./components/ui/switch";
 import { Label } from "./components/ui/label";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
+import { Skeleton } from "./components/ui/skeleton";
 
 import api from './api/axiosConfig';
 
@@ -15,10 +16,10 @@ export default function LearnPage() {
     id: number;
     english: string;
     german: string;
-    locked_until?: number;
   }
 
   const { listId } = useParams();
+  const [listName, setListName] = useState();
 
   const [translations, setTranslations] = useState<Translation[]>([{id: 0, english: "tree", german: "Baum"}, {id: 1, english: "cat", german: "Katze"}, {id: 2, english: "fish", german: "Fisch"}]);
 
@@ -38,6 +39,10 @@ export default function LearnPage() {
         console.log(response.data);
 
         setTranslations(response.data);
+
+        //set the list name
+        setListName(response.data[0].list.name);
+
         return response.data;
       });
     } catch (error) {
@@ -64,6 +69,8 @@ export default function LearnPage() {
   }, []);
 
   function handleFlip(flipped: boolean) {
+    if(currentTranslation)
+
     setFlipped(flipped);
 
     if(flipped) {
@@ -121,8 +128,8 @@ export default function LearnPage() {
   return (
     <AppLayout>
         <nav>
-            <h1>Learning: The Road</h1>
-            <p className="text-muted-foreground">Amount of words: 46</p>
+            <h1 className="inline">Learning: </h1> <h1 className="inline-block">{listName || <Skeleton className="h-8 w-[190px]"/>}</h1>
+            <h3 className="text-muted-foreground text-center text-lg">{progress}% / 100% </h3>
             <Progress value={progress} className="mt-4"/>
 
         </nav>
@@ -154,7 +161,7 @@ export default function LearnPage() {
         */}
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
-          <p className="text-4xl select-none">{wordShown}</p>
+          <p className="text-4xl select-none">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
 
           {flipped && (
             <div className="flex flex-row justify-center justify-self-end gap-4 w-full">
