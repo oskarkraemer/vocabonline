@@ -1,4 +1,4 @@
-package me.oskarkraemer.vocabonline.model;
+package me.oskarkraemer.vocabonline.model.translation;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

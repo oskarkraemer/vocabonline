@@ -1,6 +1,5 @@
 package me.oskarkraemer.vocabonline.model.translation;
 
-import me.oskarkraemer.vocabonline.model.Translation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
