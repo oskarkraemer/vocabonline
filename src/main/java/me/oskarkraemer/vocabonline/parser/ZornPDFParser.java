@@ -10,10 +10,15 @@ import technology.tabula.*;
 import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
 
 public class ZornPDFParser {
-    public static List<Translation> parsePDF(String path) {
+    public static List<Translation> parsePDFPath(String path) {
+        //return parsePDF(new File(path).get);
+        return new ArrayList<Translation>();
+    }
+
+    public static List<Translation> parsePDF(byte[] pdf_data) {
         List<Translation> translations = new ArrayList<>();
 
-        try (PDDocument document = PDDocument.load(new File(path))) {
+        try (PDDocument document = PDDocument.load(pdf_data)) {
             SpreadsheetExtractionAlgorithm sea = new SpreadsheetExtractionAlgorithm();
             PageIterator pi = new ObjectExtractor(document).extract();
             while (pi.hasNext()) {
