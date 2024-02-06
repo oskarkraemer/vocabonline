@@ -30,6 +30,9 @@ public class ImporterService {
                 Translation t = parsedTranslations.get(i);
                 t.setList(newList);
 
+                String[] synonyms = {};
+                t.setSynonyms(synonyms);
+
                 parsedTranslations.set(i, t);
             }
 

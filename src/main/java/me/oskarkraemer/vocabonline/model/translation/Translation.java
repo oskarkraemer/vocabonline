@@ -25,7 +25,7 @@ public class Translation {
     @Column(nullable = false)
     private String english;
 
-    @Column
+    @Column(nullable = false)
     private String[] synonyms;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
