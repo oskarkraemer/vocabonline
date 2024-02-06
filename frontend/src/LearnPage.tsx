@@ -125,7 +125,7 @@ export default function LearnPage() {
     <AppLayout>
         <nav>
             <h1 className="inline">Learning: </h1> <h1 className="inline-block">{listName || <Skeleton className="h-8 w-[190px]"/>}</h1>
-            <h3 className="text-muted-foreground text-center text-lg">{progress}% / 100% </h3>
+            <h3 className="text-muted-foreground text-center text-lg">{Math.round(progress)}% / 100% </h3>
             <Progress value={progress} className="mt-4"/>
 
         </nav>
