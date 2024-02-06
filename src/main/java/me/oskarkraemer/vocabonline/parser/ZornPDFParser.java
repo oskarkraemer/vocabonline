@@ -1,6 +1,9 @@
 package me.oskarkraemer.vocabonline.parser;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,11 @@ import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
 
 public class ZornPDFParser {
     public static List<Translation> parsePDFPath(String path) {
-        //return parsePDF(new File(path).get);
-        return new ArrayList<Translation>();
+        try {
+            return parsePDF(Files.readAllBytes(new File(path).toPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static List<Translation> parsePDF(byte[] pdf_data) {
