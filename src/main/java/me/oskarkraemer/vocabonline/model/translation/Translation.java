@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.oskarkraemer.vocabonline.model.list.List;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 @Table(name = "translation")
 public class Translation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
@@ -30,6 +31,7 @@ public class Translation {
     @ManyToOne(cascade = CascadeType.REMOVE)
     private List list;
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "timestamptz default now()")
     private Date created_at;

@@ -18,15 +18,17 @@ public class ImporterController {
     @Autowired
     private ImporterService importerService;
 
-    @RequestMapping(value = "/upload_zorn", method = RequestMethod.POST)
-    public ResponseEntity<String> importZornPDF(@RequestParam("file") MultipartFile file) {
+    @RequestMapping(value = "/upload_zorn/{list_name}", method = RequestMethod.POST)
+    public ResponseEntity<String> importZornPDF(@RequestParam("file") MultipartFile file, @PathVariable String list_name) {
+        if(list_name.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         byte[] bt;
 
         try {
             bt = file.getBytes();
         } catch (IOException e) {
-            return new ResponseEntity<String>("bad request", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<String>(importerService.zornPDF(bt).toString(), HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<String>(importerService.zornPDF(list_name, bt).toString(), HttpStatus.NOT_IMPLEMENTED);
     }
 }

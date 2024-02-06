@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -14,12 +15,13 @@ import java.util.Date;
 @Table(name = "list")
 public class List {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
     private String name;
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "timestamptz default now()")
     private Date created_at;
