@@ -10,7 +10,7 @@ public class ListService {
     @Autowired
     private ListRepository listRepository;
     public java.util.List<List> allLists() {
-        return listRepository.findAll();
+        return listRepository.findAllByOrderByCreatedDesc();
     }
 
     public Optional<List> singleList(String name) {
