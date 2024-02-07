@@ -11,6 +11,7 @@ import { Skeleton } from "./components/ui/skeleton";
 
 import api from './api/axiosConfig';
 import { Translation } from "./types";
+import { useWordStats } from "./lib/word_stats";
 
 export default function LearnPage() {
 
@@ -28,6 +29,8 @@ export default function LearnPage() {
 
   const [progress, setProgress] = useState(0);
   const [progressMax, setProgressMax] = useState(1);
+
+  const { increaseWordStat } = useWordStats();
 
   const getTranslations = async () => {
     try {
@@ -93,12 +96,18 @@ export default function LearnPage() {
 
     setTranslations((currentTranslations) => {
       if(knew) {
+        //increase the word stat for correct
+        increaseWordStat(currentTranslation!.id, 1, 0);
+
         //remove the current translation from the list
         newTranslations = currentTranslations.filter(translation => translation.id !== currentTranslation!.id);
 
         //set the progress
         setProgress((currentProgress) => currentProgress + (1 / progressMax * 100));
       } else {
+        //increase the word stat for incorrect
+        increaseWordStat(currentTranslation!.id, 0, 1);
+
         if(currentTranslations.length === 1) {
           //if there is only one translation left, flip it and show it again
           handleFlip(false);
