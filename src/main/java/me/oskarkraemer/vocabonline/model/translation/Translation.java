@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import me.oskarkraemer.vocabonline.model.list.List;
+import me.oskarkraemer.vocabonline.model.list.WordList;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
@@ -29,7 +29,7 @@ public class Translation {
     private String[] synonyms;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    private List list;
+    private WordList wordList;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

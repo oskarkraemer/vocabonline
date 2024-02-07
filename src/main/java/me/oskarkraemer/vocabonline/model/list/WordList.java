@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "list")
-public class List {
+public class WordList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

@@ -16,6 +16,6 @@ public class TranslationService {
     }
 
     public Optional<List<Translation>> translationsOfList(long listId) {
-        return translationRepository.findByListId(listId);
+        return translationRepository.findByWordListId(listId);
     }
 }

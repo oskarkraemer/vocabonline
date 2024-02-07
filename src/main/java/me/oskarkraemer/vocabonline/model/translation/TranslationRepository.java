@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface TranslationRepository extends JpaRepository<Translation, Long> {
-    Optional<List<Translation>> findByListId(long listId);
+    Optional<List<Translation>> findByWordListId(long listId);
 }

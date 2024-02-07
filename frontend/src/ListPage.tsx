@@ -24,8 +24,8 @@ export default function ListPage() {
         setTranslations(response.data);
 
         //set the list name and amount
-        setListName(response.data[0].list.name);
-        setWordAmount(response.data[0].list.translation_amount);
+        setListName(response.data[0].wordList.name);
+        setWordAmount(response.data[0].wordList.translation_amount);
 
         return response.data;
       });

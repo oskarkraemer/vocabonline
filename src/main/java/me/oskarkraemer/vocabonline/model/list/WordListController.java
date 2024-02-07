@@ -8,20 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/lists")
-public class ListController {
+public class WordListController {
     @Autowired
-    private ListService listService;
+    private WordListService wordListService;
     @GetMapping
-    public ResponseEntity<java.util.List<List>> getAllLists() {
-        return new ResponseEntity<java.util.List<List>>(listService.allLists(), HttpStatus.OK);
+    public ResponseEntity<List<WordList>> getAllLists() {
+        return new ResponseEntity<List<WordList>>(wordListService.allLists(), HttpStatus.OK);
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<Optional<List>> getSingleList(@PathVariable String name) {
-        return new ResponseEntity<Optional<List>>(listService.singleList(name), HttpStatus.OK);
+    public ResponseEntity<Optional<WordList>> getSingleList(@PathVariable String name) {
+        return new ResponseEntity<Optional<WordList>>(wordListService.singleList(name), HttpStatus.OK);
     }
 }

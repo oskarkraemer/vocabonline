@@ -20,11 +20,11 @@ public class TranslationController {
 
     @GetMapping
     private ResponseEntity<List<Translation>> getAllTranslations() {
-        return new ResponseEntity<java.util.List<Translation>>(translationService.allTranslations(), HttpStatus.OK);
+        return new ResponseEntity<List<Translation>>(translationService.allTranslations(), HttpStatus.OK);
     }
 
     @GetMapping("/{listId}")
     private ResponseEntity<Optional<List<Translation>>> getTranslationsOfList(@PathVariable long listId) {
-        return new ResponseEntity<Optional<java.util.List<Translation>>>(translationService.translationsOfList(listId), HttpStatus.OK);
+        return new ResponseEntity<Optional<List<Translation>>>(translationService.translationsOfList(listId), HttpStatus.OK);
     }
 }

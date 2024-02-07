@@ -38,7 +38,7 @@ export default function LearnPage() {
         setTranslations(response.data);
 
         //set the list name
-        setListName(response.data[0].list.name);
+        setListName(response.data[0].wordList.name);
 
         //set the progress max
         setProgressMax(response.data.length);

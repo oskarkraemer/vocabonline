@@ -1,6 +1,6 @@
 package me.oskarkraemer.vocabonline.model.importer;
-import me.oskarkraemer.vocabonline.model.list.List;
-import me.oskarkraemer.vocabonline.model.list.ListRepository;
+import me.oskarkraemer.vocabonline.model.list.WordList;
+import me.oskarkraemer.vocabonline.model.list.WordListRepository;
 import me.oskarkraemer.vocabonline.model.translation.Translation;
 import me.oskarkraemer.vocabonline.model.translation.TranslationRepository;
 import me.oskarkraemer.vocabonline.parser.ZornPDFParser;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImporterService {
     @Autowired
-    private ListRepository listRepository;
+    private WordListRepository wordListRepository;
 
     @Autowired
     private TranslationRepository translationRepository;
@@ -21,14 +21,14 @@ public class ImporterService {
             java.util.List<Translation> parsedTranslations = ZornPDFParser.parsePDF(pdf_data);
 
             //Create new List
-            List newList = new List();
-            newList.setName(list_name);
-            newList.setTranslation_amount(parsedTranslations.size());
+            WordList newWordList = new WordList();
+            newWordList.setName(list_name);
+            newWordList.setTranslation_amount(parsedTranslations.size());
 
             //Assign new translation to List
             for(int i = 0; i < parsedTranslations.size(); i++) {
                 Translation t = parsedTranslations.get(i);
-                t.setList(newList);
+                t.setWordList(newWordList);
 
                 String[] synonyms = {};
                 t.setSynonyms(synonyms);
@@ -37,7 +37,7 @@ public class ImporterService {
             }
 
             //Save both
-            listRepository.save(newList);
+            wordListRepository.save(newWordList);
             translationRepository.saveAllAndFlush(parsedTranslations);
 
         } catch (Exception e) {
