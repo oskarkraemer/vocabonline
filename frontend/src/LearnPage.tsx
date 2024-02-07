@@ -27,6 +27,7 @@ export default function LearnPage() {
   const [wordShown, setWordShown] = useState("");
 
   const [progress, setProgress] = useState(0);
+  const [progressMax, setProgressMax] = useState(1);
 
   const getTranslations = async () => {
     try {
@@ -38,6 +39,9 @@ export default function LearnPage() {
 
         //set the list name
         setListName(response.data[0].list.name);
+
+        //set the progress max
+        setProgressMax(response.data.length);
 
         return response.data;
       });
@@ -93,7 +97,7 @@ export default function LearnPage() {
         newTranslations = currentTranslations.filter(translation => translation.id !== currentTranslation!.id);
 
         //set the progress
-        setProgress((currentProgress) => currentProgress + (1/translations.length * 100));
+        setProgress((currentProgress) => currentProgress + (1 / progressMax * 100));
       } else {
         if(currentTranslations.length === 1) {
           //if there is only one translation left, flip it and show it again
@@ -104,6 +108,9 @@ export default function LearnPage() {
         newTranslations = currentTranslations.filter(translation => translation.id !== currentTranslation!.id);
         newTranslations.push(currentTranslation!);
       }
+
+      console.log("New translations:");
+      console.log(newTranslations);
 
       //set the new translations
       setTranslations(newTranslations);
