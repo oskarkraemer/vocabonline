@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import me.oskarkraemer.vocabonline.api.dictionary.Definition;
+import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPI;
+import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPIResult;
+import me.oskarkraemer.vocabonline.api.dictionary.Meaning;
 import me.oskarkraemer.vocabonline.model.list.WordList;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Date;
+import java.util.*;
 
 @Data
 @Entity
@@ -35,4 +39,36 @@ public class Translation {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "timestamptz default now()")
     private Date created;
+
+    public void loadSynonyms() {
+        if(english.isEmpty()) throw new IllegalStateException("The english definition has to be set in order for synonyms to be loaded");
+
+        //clean translation
+        final String cleaned_english = this.english
+                .replace("to", "")
+                .replace("sth", "")
+                .replace("of", "")
+                .replace("doing", "")
+                .replace("sb", "")
+                .replace("/", "")
+                .replace(" ", "")
+                .split(",")[0];
+
+        Optional<DictionaryAPIResult> result = DictionaryAPI.getEntry(cleaned_english);
+        if(result.isEmpty()) return;
+
+        final boolean isVerb = this.english.startsWith("to");
+
+        for(Meaning meaning: result.get().meanings) {
+            if(isVerb && meaning.partOfSpeech.equals("verb")) {
+                this.setSynonyms(meaning.synonyms.toArray(new String[0]));
+            }
+            else if (!isVerb) {
+                Set<String> mergedSynonyms = new HashSet<>(Arrays.asList(this.synonyms));
+                mergedSynonyms.addAll(meaning.synonyms);
+
+                this.setSynonyms(mergedSynonyms.toArray(String[]::new));
+            }
+        }
+    }
 }
