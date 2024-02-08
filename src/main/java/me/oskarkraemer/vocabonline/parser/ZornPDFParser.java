@@ -3,7 +3,6 @@ package me.oskarkraemer.vocabonline.parser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +11,16 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import technology.tabula.*;
 import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
 
-public class ZornPDFParser {
-    public static List<Translation> parsePDFPath(String path) {
+public class ZornPDFParser implements PDFParser {
+    public List<Translation> parsePDFFile(String path) {
         try {
-            return parsePDF(Files.readAllBytes(new File(path).toPath()));
+            return this.parsePDF(Files.readAllBytes(new File(path).toPath()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static List<Translation> parsePDF(byte[] pdf_data) {
+    public List<Translation> parsePDF(byte[] pdf_data) {
         List<Translation> translations = new ArrayList<>();
 
         try (PDDocument document = PDDocument.load(pdf_data)) {
