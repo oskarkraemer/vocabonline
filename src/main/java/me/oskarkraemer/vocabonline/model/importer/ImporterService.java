@@ -19,6 +19,7 @@ public class ImporterService {
     public HttpStatus zornPDF(String list_name, byte[] pdf_data) {
         try {
             java.util.List<Translation> parsedTranslations = ZornPDFParser.parsePDF(pdf_data);
+            if(parsedTranslations.isEmpty()) return HttpStatus.UNPROCESSABLE_ENTITY;
 
             //Create new List
             WordList newWordList = new WordList();
