@@ -11,9 +11,11 @@ import { Button } from "./components/ui/button"
 import { Badge } from "./components/ui/badge"
 import { useNavigate } from "react-router-dom";
 import { Translation } from "./types";
+import { useWordStats } from "./lib/word_stats";
   
   export function WordsTable(props: { translations: Translation[] }) {
     const navigate = useNavigate();
+    const { isHard } = useWordStats();
 
     const translations = props.translations;
 
@@ -35,7 +37,13 @@ import { Translation } from "./types";
                 className="cursor-pointer"
             >
                 <TableCell className="font-medium">{translation.id}</TableCell>
-                <TableCell>{translation.english}</TableCell>
+                <TableCell>
+                  {isHard(translation.id) && (
+                  <Badge variant="destructive" className="mr-2">Hard</Badge>
+                  )}
+                  
+                  {translation.english}
+                  </TableCell>
                 <TableCell>{translation.german}</TableCell>
                 <TableCell>
                     {translation.synonyms.map((synonym) => (

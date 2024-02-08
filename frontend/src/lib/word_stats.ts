@@ -14,6 +14,17 @@ export const useWordStats = () => {
         return saved ? JSON.parse(saved) : initialState;
     });
 
+    const getWordStat = (word_id: number) => {
+        return wordStats.find((wordStat) => wordStat.word_id === word_id);
+    }
+
+    const isHard = (word_id: number) => {
+        const wordStat = getWordStat(word_id);
+        if (!wordStat) return false;
+
+        return wordStat.incorrect * 2 > wordStat.correct;
+    }
+
     const increaseWordStat = (word_id: number, correct: number, incorrect: number) => {
         setWordStats(prevStats => {
             const newWordStats = [...prevStats];
@@ -33,5 +44,5 @@ export const useWordStats = () => {
         localStorage.setItem("wordStats", JSON.stringify(wordStats));
     }, [wordStats]);
 
-    return { wordStats, increaseWordStat };
+    return { getWordStat, increaseWordStat, isHard };
 };
