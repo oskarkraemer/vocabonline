@@ -6,6 +6,7 @@ import me.oskarkraemer.vocabonline.model.translation.TranslationRepository;
 import me.oskarkraemer.vocabonline.parser.PDFParser;
 import me.oskarkraemer.vocabonline.parser.ZornPDFParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class ImporterService {
     @Autowired
     private TranslationRepository translationRepository;
 
+    @Value("${bht.apiKey}")
+    private String bhtKey;
+
     public HttpStatus importPDF(String list_name, PDFParser pdfParser, byte[] pdf_data) {
         try {
             List<Translation> parsedTranslations = pdfParser.parsePDF(pdf_data);
@@ -26,6 +30,7 @@ public class ImporterService {
             return importTranslations(list_name, parsedTranslations);
         }
         catch (Exception e) {
+            System.out.println("Exception in importPDF: " + e);
             return HttpStatus.UNPROCESSABLE_ENTITY;
         }
     }
@@ -43,7 +48,7 @@ public class ImporterService {
             Translation t = translations.get(i);
             t.setWordList(newWordList);
 
-            t.loadSynonyms();
+            t.loadSynonyms(bhtKey);
 
             translations.set(i, t);
         }
