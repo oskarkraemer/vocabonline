@@ -22,8 +22,6 @@ public class DictionaryAPI {
         ResponseEntity<String> resultEntity = restTemplate.exchange(BASE_URL + english_word, HttpMethod.GET, entity, String.class);
         String result = resultEntity.getBody();
 
-        System.out.println(result);
-
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             return Optional.of(mapper.readValue(result, DictionaryAPIResult[].class)[0]);
