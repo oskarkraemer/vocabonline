@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import me.oskarkraemer.vocabonline.api.dictionary.Definition;
 import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPI;
 import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPIResult;
 import me.oskarkraemer.vocabonline.api.dictionary.Meaning;
@@ -45,26 +44,37 @@ public class Translation {
 
         //clean translation
         final String cleaned_english = this.english
-                .replace("to", "")
-                .replace("sth", "")
-                .replace("of", "")
-                .replace("doing", "")
-                .replace("sb", "")
+                .replace("to ", "")
+                .replace(" sth", "")
+                .replace(" of", "")
+                .replace(" doing ", "")
+                .replace(" sb ", "")
                 .replace("/", "")
-                .replace(" ", "")
                 .split(",")[0];
 
+        System.out.println(cleaned_english);
+
         Optional<DictionaryAPIResult> result = DictionaryAPI.getEntry(cleaned_english);
-        if(result.isEmpty()) return;
+        if(result.isEmpty()) {
+            System.out.println("no snys found - setting syns to empty.");
+            String[] synonyms = {};
+            this.setSynonyms(synonyms);
+            return;
+        }
 
         final boolean isVerb = this.english.startsWith("to");
 
         for(Meaning meaning: result.get().meanings) {
-            if(isVerb && meaning.partOfSpeech.equals("verb")) {
+            if(isVerb && meaning.partOfSpeech != null && meaning.partOfSpeech.equals("verb")) {
                 this.setSynonyms(meaning.synonyms.toArray(new String[0]));
             }
             else if (!isVerb) {
-                Set<String> mergedSynonyms = new HashSet<>(Arrays.asList(this.synonyms));
+                String[] currentSynonyms = this.getSynonyms();
+                if(currentSynonyms == null) {
+                    currentSynonyms = new String[0];
+                }
+
+                Set<String> mergedSynonyms = new HashSet<>(Arrays.asList(currentSynonyms));
                 mergedSynonyms.addAll(meaning.synonyms);
 
                 this.setSynonyms(mergedSynonyms.toArray(String[]::new));

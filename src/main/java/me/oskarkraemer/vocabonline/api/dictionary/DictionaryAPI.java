@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -19,8 +20,15 @@ public class DictionaryAPI {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> resultEntity = restTemplate.exchange(BASE_URL + english_word, HttpMethod.GET, entity, String.class);
-        String result = resultEntity.getBody();
+
+        String result;
+
+        try {
+            ResponseEntity<String> resultEntity = restTemplate.exchange(BASE_URL + english_word, HttpMethod.GET, entity, String.class);
+            result = resultEntity.getBody();
+        } catch (HttpClientErrorException e) {
+            return Optional.empty();
+        }
 
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {

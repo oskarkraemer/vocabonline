@@ -33,30 +33,24 @@ public class ImporterService {
     HttpStatus importTranslations(String list_name, List<Translation> translations) {
         if(translations.isEmpty()) return HttpStatus.UNPROCESSABLE_ENTITY;
 
-        try {
-            //Create new List
-            WordList newWordList = new WordList();
-            newWordList.setName(list_name);
-            newWordList.setTranslation_amount(translations.size());
+        //Create new List
+        WordList newWordList = new WordList();
+        newWordList.setName(list_name);
+        newWordList.setTranslation_amount(translations.size());
 
-            //Assign new translation to List
-            for(int i = 0; i < translations.size(); i++) {
-                Translation t = translations.get(i);
-                t.setWordList(newWordList);
+        //Assign new translation to List
+        for(int i = 0; i < translations.size(); i++) {
+            Translation t = translations.get(i);
+            t.setWordList(newWordList);
 
-                String[] synonyms = {};
-                t.setSynonyms(synonyms);
+            t.loadSynonyms();
 
-                translations.set(i, t);
-            }
-
-            //Save both
-            wordListRepository.save(newWordList);
-            translationRepository.saveAllAndFlush(translations);
-
-        } catch (Exception e) {
-            return HttpStatus.UNPROCESSABLE_ENTITY;
+            translations.set(i, t);
         }
+
+        //Save both
+        wordListRepository.save(newWordList);
+        translationRepository.saveAllAndFlush(translations);
 
         return HttpStatus.OK;
     }

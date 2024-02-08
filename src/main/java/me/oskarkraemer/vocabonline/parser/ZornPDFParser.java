@@ -68,11 +68,11 @@ public class ZornPDFParser implements PDFParser {
             System.out.println(e);
         }
 
-        for(Translation translation: translations) {
+        /*for(Translation translation: translations) {
             System.out.println("English: " + translation.getEnglish());
             System.out.println("German: " + translation.getGerman());
             System.out.println();
-        }
+        }*/
 
         return translations;
     }
