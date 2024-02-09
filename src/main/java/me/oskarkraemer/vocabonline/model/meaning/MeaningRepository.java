@@ -1,4 +1,4 @@
-package me.oskarkraemer.vocabonline.api.dictionary;
+package me.oskarkraemer.vocabonline.model.meaning;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

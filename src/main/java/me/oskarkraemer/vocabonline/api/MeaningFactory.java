@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.oskarkraemer.vocabonline.api.bht.BhtAPI;
 import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPIResult;
-import me.oskarkraemer.vocabonline.api.dictionary.Meaning;
+import me.oskarkraemer.vocabonline.model.meaning.Meaning;
 import me.oskarkraemer.vocabonline.model.translation.Translation;
 
 import java.util.List;

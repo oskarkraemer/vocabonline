@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import me.oskarkraemer.vocabonline.api.WordCleaner;
 import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPIResult;
-import me.oskarkraemer.vocabonline.api.dictionary.Meaning;
+import me.oskarkraemer.vocabonline.model.meaning.Meaning;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;

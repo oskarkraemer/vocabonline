@@ -1,4 +1,4 @@
-package me.oskarkraemer.vocabonline.api.dictionary;
+package me.oskarkraemer.vocabonline.model.meaning;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;

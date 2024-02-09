@@ -1,14 +1,13 @@
 package me.oskarkraemer.vocabonline.model.importer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import me.oskarkraemer.vocabonline.api.MeaningFactory;
-import me.oskarkraemer.vocabonline.api.dictionary.Meaning;
-import me.oskarkraemer.vocabonline.api.dictionary.MeaningRepository;
+import me.oskarkraemer.vocabonline.model.meaning.Meaning;
+import me.oskarkraemer.vocabonline.model.meaning.MeaningRepository;
 import me.oskarkraemer.vocabonline.model.list.WordList;
 import me.oskarkraemer.vocabonline.model.list.WordListRepository;
 import me.oskarkraemer.vocabonline.model.translation.Translation;
 import me.oskarkraemer.vocabonline.model.translation.TranslationRepository;
 import me.oskarkraemer.vocabonline.parser.PDFParser;
-import me.oskarkraemer.vocabonline.parser.ZornPDFParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
