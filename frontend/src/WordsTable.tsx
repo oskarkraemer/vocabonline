@@ -19,6 +19,22 @@ import { useWordStats } from "./lib/word_stats";
 
     const translations = props.translations;
 
+    function formatSynonyms(translation: Translation): string[] {
+      if (translation.meanings.length === 0 || translation.meanings[0].synonyms === null) {
+        return [];
+      }
+      
+      let synonyms: string[] = [];
+      translation.meanings.map((meaning) => {
+        //add meaning.part_of_speech to every synonym
+        meaning.synonyms.map((synonym) => {
+          synonyms.push(meaning.partOfSpeech + ": " + (meaning.partOfSpeech=="verb" ? "to ": "") + synonym);
+        });
+      });
+
+      return synonyms;
+    }
+
     return (
       <Table>
         <TableCaption>A list of translations.</TableCaption>
@@ -46,7 +62,7 @@ import { useWordStats } from "./lib/word_stats";
                   </TableCell>
                 <TableCell>{translation.german}</TableCell>
                 <TableCell>
-                    {translation.synonyms.map((synonym) => (
+                    {formatSynonyms(translation).map((synonym) => (
                     <Badge key={synonym} variant="secondary" className="mr-1 mt-1 sm:mt-0">
                         {synonym}
                     </Badge>
