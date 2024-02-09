@@ -36,21 +36,4 @@ public class Translation {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "timestamptz default now()")
     private Date created;
-
-    public void loadSynonyms(String bhtKey) throws JsonProcessingException {
-        if(english.isEmpty()) throw new IllegalStateException("The english definition has to be set in order for synonyms to be loaded");
-
-        Optional<DictionaryAPIResult> result = BhtAPI.getEntry(this.english, bhtKey);
-
-        if(result.isEmpty()) {
-            System.out.println("no snys found for: " + this.english);
-            return;
-        }
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        System.out.println(mapper.writeValueAsString(result.get()));
-        System.out.println();
-
-    }
 }

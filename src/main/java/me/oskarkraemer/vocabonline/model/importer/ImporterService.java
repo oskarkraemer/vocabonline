@@ -1,5 +1,8 @@
 package me.oskarkraemer.vocabonline.model.importer;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import me.oskarkraemer.vocabonline.api.MeaningFactory;
+import me.oskarkraemer.vocabonline.api.dictionary.Meaning;
+import me.oskarkraemer.vocabonline.api.dictionary.MeaningRepository;
 import me.oskarkraemer.vocabonline.model.list.WordList;
 import me.oskarkraemer.vocabonline.model.list.WordListRepository;
 import me.oskarkraemer.vocabonline.model.translation.Translation;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +24,9 @@ public class ImporterService {
 
     @Autowired
     private TranslationRepository translationRepository;
+
+    @Autowired
+    private MeaningRepository meaningRepository;
 
     @Value("${bht.apiKey}")
     private String bhtKey;
@@ -44,19 +51,25 @@ public class ImporterService {
         newWordList.setName(list_name);
         newWordList.setTranslation_amount(translations.size());
 
+        //Meanings list
+        List<Meaning> meanings = new ArrayList<>();
+
         //Assign new translation to List
         for(int i = 0; i < translations.size(); i++) {
             Translation t = translations.get(i);
             t.setWordList(newWordList);
 
-            t.loadSynonyms(bhtKey);
+            List<Meaning> m = MeaningFactory.createFor(t, bhtKey);
+            if(m != null)
+                meanings.addAll(m);
 
             translations.set(i, t);
         }
 
         //Save both
         wordListRepository.save(newWordList);
-        translationRepository.saveAllAndFlush(translations);
+        translationRepository.saveAll(translations);
+        meaningRepository.saveAllAndFlush(meanings);
 
         return HttpStatus.OK;
     }
