@@ -2,6 +2,7 @@ package me.oskarkraemer.vocabonline.api.dictionary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DictionaryAPIResult
@@ -13,5 +14,5 @@ public class DictionaryAPIResult
     public Phonetics[] phonetics;
 
     @JsonProperty
-    public List<Meaning> meanings;
+    public List<Meaning> meanings = new ArrayList<>();
 }

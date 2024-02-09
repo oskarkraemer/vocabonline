@@ -1,4 +1,5 @@
 package me.oskarkraemer.vocabonline.model.importer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import me.oskarkraemer.vocabonline.model.list.WordList;
 import me.oskarkraemer.vocabonline.model.list.WordListRepository;
 import me.oskarkraemer.vocabonline.model.translation.Translation;
@@ -35,7 +36,7 @@ public class ImporterService {
         }
     }
 
-    HttpStatus importTranslations(String list_name, List<Translation> translations) {
+    HttpStatus importTranslations(String list_name, List<Translation> translations) throws JsonProcessingException {
         if(translations.isEmpty()) return HttpStatus.UNPROCESSABLE_ENTITY;
 
         //Create new List
