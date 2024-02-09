@@ -30,9 +30,11 @@ public class Translation {
     @Column(nullable = false)
     private String english;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "translation", cascade = CascadeType.ALL)
+    @Column(nullable = false)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "translation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meaning> meanings;
 
+    @JoinColumn(name = "word_list_id")
     @ManyToOne(cascade = CascadeType.REMOVE)
     private WordList wordList;
 

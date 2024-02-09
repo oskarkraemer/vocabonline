@@ -62,6 +62,8 @@ public class ImporterService {
             if(m != null) {
                 meanings.addAll(m);
                 t.setMeanings(meanings);
+            } else {
+                t.setMeanings(new ArrayList<>());
             }
 
             translations.set(i, t);
