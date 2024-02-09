@@ -6,6 +6,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
+    TableRowBottomless,
   } from "@/components/ui/table"
 import { Button } from "./components/ui/button"
 import { Badge } from "./components/ui/badge"
@@ -19,8 +20,12 @@ import { useWordStats } from "./lib/word_stats";
 
     const translations = props.translations;
 
+    function hasSynonyms(translation: Translation): boolean {
+      return translation.meanings.length > 0 && translation.meanings[0].synonyms !== null;
+    }
+
     function formatSynonyms(translation: Translation): string[] {
-      if (translation.meanings.length === 0 || translation.meanings[0].synonyms === null) {
+      if (!hasSynonyms(translation)){
         return [];
       }
       
@@ -41,37 +46,47 @@ import { useWordStats } from "./lib/word_stats";
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>
-            <TableHead>English</TableHead>
+            <TableHead className="min-w-[135px]">English</TableHead>
             <TableHead>German</TableHead>
-            <TableHead>Synonyms</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {translations.map((translation) => (
-            <TableRow key={translation.id}
-                onClick={() => navigate(`/translation/${translation.id}`)}
-                className="cursor-pointer"
-            >
-                <TableCell className="font-medium">{translation.id}</TableCell>
-                <TableCell>
-                  {isHard(translation.id) && (
-                  <Badge variant="destructive" className="mr-2">Hard</Badge>
+            <>
+              <TableRowBottomless key={translation.id}
+                  onClick={() => navigate(`/translation/${translation.id}`)}
+                  className="cursor-pointer"
+              >
+                  <TableCell className="font-medium">{translation.id}</TableCell>
+                  <TableCell>
+                    {isHard(translation.id) && (
+                    <Badge variant="destructive" className="mr-2">Hard</Badge>
+                    )}
+                    
+                    {translation.english}
+                    </TableCell>
+                  <TableCell>{translation.german}</TableCell>
+
+              </TableRowBottomless>
+
+              <TableRow key={translation.id}
+                  onClick={() => navigate(`/translation/${translation.id}`)}
+                  className="cursor-pointer"
+              >
+                  {hasSynonyms(translation) && (
+                    <>
+                      <TableCell></TableCell>
+                      <TableCell colSpan={2} className="py-0 pb-6">
+                        <div className="flex flex-wrap">
+                          {formatSynonyms(translation).slice(0,4).map((synonym) => (
+                            <Badge variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
+                          ))}
+                        </div>
+                      </TableCell>
+                    </>
                   )}
-                  
-                  {translation.english}
-                  </TableCell>
-                <TableCell>{translation.german}</TableCell>
-                <TableCell>
-                    {formatSynonyms(translation).slice(0, 5).map((synonym) => (
-                    <Badge key={synonym} variant="secondary" className="mr-1 mt-1">
-                        {synonym}
-                    </Badge>
-                    ))}
-                </TableCell>
-                <TableCell className="text-right">
-                    <Button variant="default">Details</Button>
-                </TableCell>
-            </TableRow>
+              </TableRow>
+            </>
           ))}
         </TableBody>
       </Table>
