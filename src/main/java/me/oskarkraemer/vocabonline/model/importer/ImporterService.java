@@ -59,8 +59,10 @@ public class ImporterService {
             t.setWordList(newWordList);
 
             List<Meaning> m = MeaningFactory.createFor(t, bhtKey);
-            if(m != null)
+            if(m != null) {
                 meanings.addAll(m);
+                t.setMeanings(meanings);
+            }
 
             translations.set(i, t);
         }

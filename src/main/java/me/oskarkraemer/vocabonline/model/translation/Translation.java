@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import me.oskarkraemer.vocabonline.api.bht.BhtAPI;
 import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPIResult;
 import me.oskarkraemer.vocabonline.model.list.WordList;
+import me.oskarkraemer.vocabonline.model.meaning.Meaning;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.*;
@@ -28,6 +29,9 @@ public class Translation {
 
     @Column(nullable = false)
     private String english;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "translation", cascade = CascadeType.ALL)
+    private List<Meaning> meanings;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     private WordList wordList;

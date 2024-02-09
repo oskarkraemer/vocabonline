@@ -1,5 +1,6 @@
 package me.oskarkraemer.vocabonline.model.meaning;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +25,8 @@ public class Meaning {
     private long id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="translation_id")
+    @JsonIgnore
     private Translation translation;
 
     @Column(nullable = false)
