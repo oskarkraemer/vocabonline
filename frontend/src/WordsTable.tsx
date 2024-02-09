@@ -62,8 +62,8 @@ import { useWordStats } from "./lib/word_stats";
                   </TableCell>
                 <TableCell>{translation.german}</TableCell>
                 <TableCell>
-                    {formatSynonyms(translation).map((synonym) => (
-                    <Badge key={synonym} variant="secondary" className="mr-1 mt-1 sm:mt-0">
+                    {formatSynonyms(translation).slice(0, 5).map((synonym) => (
+                    <Badge key={synonym} variant="secondary" className="mr-1 mt-1">
                         {synonym}
                     </Badge>
                     ))}
