@@ -12,7 +12,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/list/:listId" element={<ListPage />} />
-        <Route path="/learnList/:listId" element={<LearnPage />} />
+
+        <Route path="/learnList/:listId" element={<LearnPage onlyHard={false} />} />
+        <Route path="/learnListHard/:listId" element={<LearnPage onlyHard={true} />} />
 
         <Route path='/translation/:translationId' element={<div>Translation: WIP</div>} />
       </Routes>

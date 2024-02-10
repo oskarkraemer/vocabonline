@@ -9,7 +9,8 @@ export default function ListPageHeader(props: { listName: string, wordAmount: nu
                 <h1>Vocabulary: {props.listName}</h1>
                 <p>This dataset contains {props.wordAmount} words.</p>
 
-                <a href={"/learnList/" + props.listId}><Button className="mt-4" variant="default">Start Learning</Button></a>
+                <a href={"/learnList/" + props.listId}><Button className="mt-4 mr-3" variant="default">Learn All</Button></a>
+                <a href={"/learnListHard/" + props.listId}><Button className="mt-4" variant="destructive">Learn Hard</Button></a>
             </>
             :
             <>

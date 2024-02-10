@@ -14,7 +14,7 @@ import { Translation } from "../../types";
 import { useWordStats } from "../../lib/word_stats";
 import LearnPageHeader from "./LearnPageHeader";
 
-export default function LearnPage() {
+export default function LearnPage(props : {onlyHard: boolean}) {
 
   const { listId } = useParams();
   const [listName, setListName] = useState();
@@ -31,7 +31,7 @@ export default function LearnPage() {
   const [progress, setProgress] = useState(0);
   const [progressMax, setProgressMax] = useState(1);
 
-  const { increaseWordStat } = useWordStats();
+  const { increaseWordStat, isHard } = useWordStats();
 
   const getTranslations = async () => {
     try {
@@ -44,9 +44,6 @@ export default function LearnPage() {
         //set the list name
         setListName(response.data[0].wordList.name);
 
-        //set the progress max
-        setProgressMax(response.data.length);
-
         return response.data;
       });
     } catch (error) {
@@ -54,10 +51,17 @@ export default function LearnPage() {
     }
   }
 
-  //Shuffle the translations
+  //Get the translations
   useEffect(() => {
     console.log("Fetching translations...");
     getTranslations().then((response_translations: Translation[]) => {
+      if(props.onlyHard) {
+        console.log("Only hard mode is enabled. Filtering translations...");
+        response_translations = response_translations.filter(translation => isHard(translation.id));
+      }
+
+      //set the progress max
+      setProgressMax(response_translations.length);   
 
       console.log("Shuffling translations...");
 
