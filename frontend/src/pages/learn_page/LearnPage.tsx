@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import AppLayout from "../../AppLayout";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
-import { Progress } from "../../components/ui/progress";
 import { useEffect, useState } from "react";
 import { Switch } from "../../components/ui/switch";
 import { Label } from "../../components/ui/label";
@@ -19,7 +18,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
   const { listId } = useParams();
   const [listName, setListName] = useState();
 
-  const [translations, setTranslations] = useState<Translation[]>([]);
+  const [, setTranslations] = useState<Translation[]>([]);
 
   const [currentTranslation, setCurrentTranslation] = useState<Translation>();
   const [flipped, setFlipped] = useState(false);

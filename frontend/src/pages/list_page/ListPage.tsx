@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import AppLayout from "../../AppLayout";
 import { WordsTable } from "./WordsTable";
-import { Button } from "../../components/ui/button";
 
 import api from '../../api/axiosConfig';
 import { Translation } from "../../types";
