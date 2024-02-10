@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 
 import './app/globals.css'
-import Dashboard from './Dashboard.tsx'
+import Dashboard from './pages/dashboard/Dashboard.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ListPage from './pages/list_page/ListPage.tsx'
 import LearnPage from './pages/learn_page/LearnPage.tsx'

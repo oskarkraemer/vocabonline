@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import AppLayout from "./AppLayout";
+import AppLayout from "../../AppLayout";
 import { ListTable } from "./ListTable";
 
-import api from './api/axiosConfig';
-import { List } from "./types";
+import api from '../../api/axiosConfig';
+import { List } from "../../types";
 
 export default function Dashboard() {
 

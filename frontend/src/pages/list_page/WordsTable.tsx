@@ -57,15 +57,15 @@ import { useWordStats } from "../../lib/word_stats";
                   onClick={() => navigate(`/translation/${translation.id}`)}
                   className="cursor-pointer"
               >
-                  <TableCell className="font-medium">{translation.id}</TableCell>
-                  <TableCell>
+                  <TableCell className="text-base font-medium">{translation.id}</TableCell>
+                  <TableCell className="text-base">
                     {isHard(translation.id) && (
                     <Badge variant="destructive" className="mr-2">Hard</Badge>
                     )}
                     
                     {translation.english}
                     </TableCell>
-                  <TableCell>{translation.german}</TableCell>
+                  <TableCell className="text-base">{translation.german}</TableCell>
 
               </TableRowBottomless>
 
@@ -79,7 +79,7 @@ import { useWordStats } from "../../lib/word_stats";
                       <TableCell colSpan={2} className="py-0 pb-4">
                         <div className="synonym-wrapper flex flex-wrap">
                           {formatSynonyms(translation).slice(0,3).map((synonym) => (
-                            <Badge variant="outline" className="mr-1 mt-1">{synonym}</Badge>
+                            <Badge variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
                           ))}
                         </div>
                       </TableCell>
