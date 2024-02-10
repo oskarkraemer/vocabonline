@@ -39,17 +39,17 @@ export default function ListPage() {
   }, []);
   
   return (
-    <AppLayout>
-        <nav>
-            <h1>Vocabulary: {listName}</h1>
-            <p>This dataset contains {wordAmount} words.</p>
+      <AppLayout>
+          <nav>
+              <h1>Vocabulary: {listName}</h1>
+              <p>This dataset contains {wordAmount} words.</p>
 
-            <a href={"/learnList/" + listId}><Button className="mt-4" variant="default">Start Learning</Button></a>
-        </nav>
+              <a href={"/learnList/" + listId}><Button className="mt-4" variant="default">Start Learning</Button></a>
+          </nav>
 
-        <div className="mt-8" />
+          <div className="mt-8" />
 
-        <WordsTable translations={translations}/>
-    </AppLayout>
+          <WordsTable translations={translations}/>
+      </AppLayout>
   )
 }

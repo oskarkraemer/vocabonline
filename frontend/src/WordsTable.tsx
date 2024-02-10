@@ -45,8 +45,8 @@ import { useWordStats } from "./lib/word_stats";
         <TableCaption>A list of translations.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">ID</TableHead>
-            <TableHead className="min-w-[135px]">English</TableHead>
+            <TableHead className="w-[90px]">ID</TableHead>
+            <TableHead className="min-w-[145px]">English</TableHead>
             <TableHead>German</TableHead>
           </TableRow>
         </TableHeader>
@@ -76,10 +76,10 @@ import { useWordStats } from "./lib/word_stats";
                   {hasSynonyms(translation) && (
                     <>
                       <TableCell></TableCell>
-                      <TableCell colSpan={2} className="py-0 pb-6">
-                        <div className="flex flex-wrap">
-                          {formatSynonyms(translation).slice(0,4).map((synonym) => (
-                            <Badge variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
+                      <TableCell colSpan={2} className="py-0 pb-4">
+                        <div className="synonym-wrapper flex flex-wrap">
+                          {formatSynonyms(translation).slice(0,3).map((synonym) => (
+                            <Badge variant="outline" className="mr-1 mt-1">{synonym}</Badge>
                           ))}
                         </div>
                       </TableCell>
