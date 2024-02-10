@@ -4,7 +4,7 @@ import './app/globals.css'
 import Dashboard from './Dashboard.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ListPage from './ListPage.tsx'
-import LearnPage from './LearnPage.tsx'
+import LearnPage from './learn_page/LearnPage.tsx'
 
 export default function App() {
   return (

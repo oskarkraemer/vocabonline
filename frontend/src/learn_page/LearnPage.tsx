@@ -1,17 +1,18 @@
 import { useParams } from "react-router-dom";
-import AppLayout from "./AppLayout";
-import { Button } from "./components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
-import { Progress } from "./components/ui/progress";
+import AppLayout from "../AppLayout";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import { Progress } from "../components/ui/progress";
 import { useEffect, useState } from "react";
-import { Switch } from "./components/ui/switch";
-import { Label } from "./components/ui/label";
+import { Switch } from "../components/ui/switch";
+import { Label } from "../components/ui/label";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { Skeleton } from "./components/ui/skeleton";
+import { Skeleton } from "../components/ui/skeleton";
 
-import api from './api/axiosConfig';
-import { Translation } from "./types";
-import { useWordStats } from "./lib/word_stats";
+import api from '../api/axiosConfig';
+import { Translation } from "../types";
+import { useWordStats } from "../lib/word_stats";
+import LearnPageHeader from "./LearnPageHeader";
 
 export default function LearnPage() {
 
@@ -139,22 +140,7 @@ export default function LearnPage() {
   
   return (
     <AppLayout>
-        <nav>
-            {listName ?
-            <>
-              <h1 className="inline">Learning: </h1> <h1 className="inline-block">{listName}</h1>
-              <h3 className="text-muted-foreground text-center text-lg">{Math.round(progress)}% / 100% </h3>
-              <Progress value={progress} className="mt-4"/>
-            </> :
-
-            <>
-              <Skeleton className="h-10 w-[330px]"/>
-              <Skeleton className="h-6 w-full mt-4 text-center"/>
-              <Progress value={progress} className="mt-4"/>
-            </>
-          }
-
-        </nav>
+        <LearnPageHeader listName={listName!} progress={progress} />
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
           <p className="text-4xl select-none">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
