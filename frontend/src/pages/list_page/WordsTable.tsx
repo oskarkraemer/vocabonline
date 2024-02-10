@@ -9,10 +9,10 @@ import {
     TableRowBottomless,
   } from "@/components/ui/table"
 
-import { Badge } from "./components/ui/badge"
+import { Badge } from "../../components/ui/badge"
 import { useNavigate } from "react-router-dom";
-import { Translation } from "./types";
-import { useWordStats } from "./lib/word_stats";
+import { Translation } from "../../types";
+import { useWordStats } from "../../lib/word_stats";
   
   export function WordsTable(props: { translations: Translation[] }) {
     const navigate = useNavigate();

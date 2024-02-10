@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
-import AppLayout from "./AppLayout";
+import AppLayout from "../../AppLayout";
 import { WordsTable } from "./WordsTable";
-import { Button } from "./components/ui/button";
+import { Button } from "../../components/ui/button";
 
-import api from './api/axiosConfig';
-import { Translation } from "./types";
+import api from '../../api/axiosConfig';
+import { Translation } from "../../types";
 import { useEffect, useState } from "react";
+import { WordsTableSkeleton } from "./WordsTableSkeleton";
 
 export default function ListPage() {
   const { listId } = useParams();
@@ -49,7 +50,11 @@ export default function ListPage() {
 
           <div className="mt-8" />
 
-          <WordsTable translations={translations}/>
+          {translations.length > 0 ?
+            <WordsTable translations={translations} />
+            :
+            <WordsTableSkeleton />
+          }
       </AppLayout>
   )
 }

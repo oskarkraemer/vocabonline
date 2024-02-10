@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
-import AppLayout from "../AppLayout";
-import { Button } from "../components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
-import { Progress } from "../components/ui/progress";
+import AppLayout from "../../AppLayout";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
+import { Progress } from "../../components/ui/progress";
 import { useEffect, useState } from "react";
-import { Switch } from "../components/ui/switch";
-import { Label } from "../components/ui/label";
+import { Switch } from "../../components/ui/switch";
+import { Label } from "../../components/ui/label";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { Skeleton } from "../components/ui/skeleton";
+import { Skeleton } from "../../components/ui/skeleton";
 
-import api from '../api/axiosConfig';
-import { Translation } from "../types";
-import { useWordStats } from "../lib/word_stats";
+import api from '../../api/axiosConfig';
+import { Translation } from "../../types";
+import { useWordStats } from "../../lib/word_stats";
 import LearnPageHeader from "./LearnPageHeader";
 
 export default function LearnPage() {
