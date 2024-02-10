@@ -9,9 +9,11 @@ import { useEffect, useState } from "react";
 import { WordsTableSkeleton } from "./WordsTableSkeleton";
 import ListPageHeader from "./ListPageHeader";
 import { WarningModal } from "./WarningModal";
+import { useUserSettings } from "@/lib/user_settings";
 
 export default function ListPage() {
   const { listId } = useParams();
+  const { userSettings, setUserSettings } = useUserSettings();
 
   const [translations, setTranslations] = useState<Translation[]>([]);
 
@@ -43,7 +45,7 @@ export default function ListPage() {
   
   return (
       <AppLayout>
-          <WarningModal title="Be aware of the context" >
+          <WarningModal title="Be aware of the context" acceptedStore={userSettings.acceptedSynonymsWarning} setAcceptedStore={(state: boolean) => {setUserSettings({acceptedSynonymsWarning: state})}}>
               Please exercise caution when using the programmatically queried synonyms, antonyms, and definitions.
               While they can be helpful, they may not always accurately reflect the intended meaning within specific contexts.
               It's imperative to thoroughly understand the nuances and connotations of words before incorporating them into your communication or writing.
