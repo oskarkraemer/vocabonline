@@ -69,7 +69,7 @@ import { useWordStats } from "./lib/word_stats";
 
               </TableRowBottomless>
 
-              <TableRow key={translation.id}
+              <TableRow key={"syn" + translation.id}
                   onClick={() => navigate(`/translation/${translation.id}`)}
                   className="cursor-pointer"
               >
