@@ -8,6 +8,7 @@ import { Translation } from "../../types";
 import { useEffect, useState } from "react";
 import { WordsTableSkeleton } from "./WordsTableSkeleton";
 import ListPageHeader from "./ListPageHeader";
+import { WarningModal } from "./WarningModal";
 
 export default function ListPage() {
   const { listId } = useParams();
@@ -42,6 +43,12 @@ export default function ListPage() {
   
   return (
       <AppLayout>
+          <WarningModal title="Be aware of the context" >
+              Please exercise caution when using the programmatically queried synonyms, antonyms, and definitions.
+              While they can be helpful, they may not always accurately reflect the intended meaning within specific contexts.
+              It's imperative to thoroughly understand the nuances and connotations of words before incorporating them into your communication or writing.
+          </WarningModal>
+
           <ListPageHeader wordAmount={wordAmount} listName={listName!} listId={listId!} />
 
           <div className="mt-8" />
