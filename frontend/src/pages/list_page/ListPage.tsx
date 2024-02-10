@@ -7,6 +7,7 @@ import api from '../../api/axiosConfig';
 import { Translation } from "../../types";
 import { useEffect, useState } from "react";
 import { WordsTableSkeleton } from "./WordsTableSkeleton";
+import ListPageHeader from "./ListPageHeader";
 
 export default function ListPage() {
   const { listId } = useParams();
@@ -41,12 +42,7 @@ export default function ListPage() {
   
   return (
       <AppLayout>
-          <nav>
-              <h1>Vocabulary: {listName}</h1>
-              <p>This dataset contains {wordAmount} words.</p>
-
-              <a href={"/learnList/" + listId}><Button className="mt-4" variant="default">Start Learning</Button></a>
-          </nav>
+          <ListPageHeader wordAmount={wordAmount} listName={listName!} listId={listId!} />
 
           <div className="mt-8" />
 
