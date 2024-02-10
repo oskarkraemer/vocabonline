@@ -140,37 +140,21 @@ export default function LearnPage() {
   return (
     <AppLayout>
         <nav>
-            <h1 className="inline">Learning: </h1> <h1 className="inline-block">{listName || <Skeleton className="h-8 w-[190px]"/>}</h1>
-            <h3 className="text-muted-foreground text-center text-lg">{Math.round(progress)}% / 100% </h3>
-            <Progress value={progress} className="mt-4"/>
+            {listName ?
+            <>
+              <h1 className="inline">Learning: </h1> <h1 className="inline-block">{listName}</h1>
+              <h3 className="text-muted-foreground text-center text-lg">{Math.round(progress)}% / 100% </h3>
+              <Progress value={progress} className="mt-4"/>
+            </> :
+
+            <>
+              <Skeleton className="h-10 w-[330px]"/>
+              <Skeleton className="h-6 w-full mt-4 text-center"/>
+              <Progress value={progress} className="mt-4"/>
+            </>
+          }
 
         </nav>
-
-        {/* ALTERNATIVE: ALWAYS CENTER WORD.
-        
-        <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="grid grid-rows-3 grid-flow-col items-center justify-items-center w-full mt-5 py-40 cursor-pointer">
-          <div />
-          <p className="text-4xl select-none">{wordShown}</p>
-
-          {flipped && (
-            <div className="flex flex-row justify-center justify-self-end gap-4 w-full">
-              <Button onClick={() => handleAwnser(true)} className="mt-6 w-[100px] py-6">
-                <CheckIcon className="w-7 h-7" />
-              </Button>
-
-              <Button onClick={() => handleAwnser(false)} className="mt-6 w-[100px] py-6">
-                <Cross1Icon className="w-6 h-6" />
-              </Button>
-            </div>
-          )}
-
-          {/Add some space if the card is not flipped /}
-          {!flipped && (
-            <div className="w-full py-9" />
-          )}
-        </Card>
-        
-        */}
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
           <p className="text-4xl select-none">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
