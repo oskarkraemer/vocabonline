@@ -1,0 +1,122 @@
+.prbr-cl {
+    --prcnt: 50; 
+    --clr:#ff0000; 
+    --bg:#09090B; 
+    --dsh: calc(283 * var(--prcnt) / 100);
+
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: var(--clr);
+    -webkit-animation: shw 1s ease;
+            animation: shw 1s ease;
+}
+
+.prbr-cl svg { 
+    -webkit-transform: rotate(-90deg); 
+    -ms-transform: rotate(-90deg); 
+    transform: rotate(-90deg); 
+}
+
+.prbr-cl-bg {
+    fill: none;
+    stroke: var(--bg);
+    stroke-width: 10;
+    stroke-linecap: round;
+}
+
+.prbr-cl-fill {
+    fill: none;
+    stroke: var(--clr);
+    stroke-width: 10;
+    stroke-linecap: round;
+    /* https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray */
+    stroke-dasharray: var(--dsh) 283;
+    /* You can use a framework or JS to change the value of --prcnt */
+    -webkit-transition: stroke-dasharray 1s ease;
+    -o-transition: stroke-dasharray 1s ease;
+    transition: stroke-dasharray 1s ease;
+    -webkit-animation: prgs 2s ease;
+            animation: prgs 2s ease;
+}
+
+/* Num (units) */
+.prbr-cl::after {
+    content: attr(data-num);
+    font-weight: 400;
+    font-size: x-large;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+
+/* Text (strings) */
+.prbr-cl::before {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+
+/* ------------------ 
+-- Attribute Styles -
+------------------ */
+/* inner-bg inside the circle */
+.prbr-cl[inner-bg] { 
+    background: var(--bg); 
+}
+/* loading animation */
+.prbr-cl[anim] .prbr-cl-fill { 
+    -webkit-animation: prgs 2s ease-in-out infinite alternate; 
+    animation: prgs 2s ease-in-out infinite alternate; 
+}
+/* scaling animation */
+.prbr-cl[pulse] { 
+    -webkit-animation: pulse 1s ease-in-out infinite alternate; 
+    animation: pulse 1s ease-in-out infinite alternate; 
+}
+.prbr-cl[txt]::before{ content: attr(txt); } /* text */
+
+/* When data-num attribute is not present, the text will be bold */
+.prbr-cl:not([data-num])::before {
+    top: 50%;
+    font-weight: 100;
+}
+
+@-webkit-keyframes shw {
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+@keyframes shw {
+    from { opacity: 0;}
+    to { opacity: 1;}
+} 
+
+@-webkit-keyframes prgs {
+    from { stroke-dashoffset: 283; }
+    to { stroke-dashoffset: 0; }
+} 
+
+@keyframes prgs {
+    from { stroke-dashoffset: 283; }
+    to { stroke-dashoffset: 0; }
+}
+
+@-webkit-keyframes pulse {
+    from { scale: 1; }
+    to { scale: 1.08; }
+}
+
+@keyframes pulse {
+    from { scale: 1; }
+    to { scale: 1.08; }
+}

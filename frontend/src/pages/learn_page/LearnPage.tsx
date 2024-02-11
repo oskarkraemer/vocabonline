@@ -12,13 +12,14 @@ import api from '../../api/axiosConfig';
 import { Translation } from "../../types";
 import { useWordStats } from "../../lib/word_stats";
 import LearnPageHeader from "./LearnPageHeader";
+import FinishedLearning from "./results/FinishedLearning";
 
 export default function LearnPage(props : {onlyHard: boolean}) {
 
   const { listId } = useParams();
   const [listName, setListName] = useState();
 
-  const [, setTranslations] = useState<Translation[]>([]);
+  const [translations, setTranslations] = useState<Translation[]>([]);
 
   const [currentTranslation, setCurrentTranslation] = useState<Translation>();
   const [flipped, setFlipped] = useState(false);
@@ -128,8 +129,10 @@ export default function LearnPage(props : {onlyHard: boolean}) {
       //set the new translations
       setTranslations(newTranslations);
 
-      //set the current translation
-      setCurrentTranslation(newTranslations[0]);
+      if(newTranslations.length > 0) {
+        //set the current translation
+        setCurrentTranslation(newTranslations[0]);
+      }
       
       return newTranslations;
     });
@@ -143,6 +146,10 @@ export default function LearnPage(props : {onlyHard: boolean}) {
   
   return (
     <AppLayout>
+      {translations.length === 0 && listName ?
+      <FinishedLearning />
+      :
+      <>
         <LearnPageHeader listName={listName!} progress={progress} />
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
@@ -178,6 +185,8 @@ export default function LearnPage(props : {onlyHard: boolean}) {
             </div>
           </CardContent>
         </Card>
+      </>
+    }
     </AppLayout>
   )
 }
