@@ -11,10 +11,14 @@ export default function FinishedLearning(props: {beforeWordStats: WordStat[], af
         <>
             <nav className="mb-4">
                 <h1>Finished Learning</h1>
-                <p>You learned 44 words.</p>
+                <p className="text-lg">You did <span className="font-bold">way worse 📉</span> than expected.</p>
             </nav>
 
-            <CorrectWrongCard wordStatsDiff={wordStatsDiff}/>
+            <div className="flex justify-center md:justify-normal flex-wrap">
+                <CorrectWrongCard wordStatsDiff={wordStatsDiff}/>
+                <CorrectWrongCard wordStatsDiff={wordStatsDiff}/>
+                <CorrectWrongCard wordStatsDiff={wordStatsDiff}/>
+            </div>
         </>
     )
 }

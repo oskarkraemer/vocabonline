@@ -28,7 +28,7 @@ export function CorrectWrongCard(props: {wordStatsDiff: WordStat[]}) {
   const correctPerc = correctTotal/(correctTotal + wrongTotal) * 100;
 
   return (
-    <Card className="max-w-[350px]">
+    <Card className="m-2 w-full sm:w-[350px]">
       <CardContent>
         <div className="prbr-cl p-2 mt-2" data-num={Math.round(correctPerc) + "%"} style={{"--prcnt":correctPerc, "--clr": "#ffffff", "--bg": "#09090b;"} as React.CSSProperties}>
             <svg viewBox="0 0 100 100">
