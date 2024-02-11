@@ -7,7 +7,7 @@ export function Navbar() {
                     <ellipse cx="76.5" cy="76" rx="75.5" ry="73" fill="black"/>
                     <ellipse cx="75.4486" cy="76.0633" rx="64.4486" ry="62.0633" fill="white"/>
                     <ellipse cx="75.4486" cy="76.0633" rx="43.3563" ry="41.7517" fill="black"/>
-                    <circle cx="61.5" cy="79.7303" r="53" stroke="black" stroke-width="11"/>
+                    <circle cx="61.5" cy="79.7303" r="53" stroke="black" strokeWidth="11"/>
                 </svg>
 
                 <h1 className="text-lg font-semibold tracking-wide inline">vokabeλ</h1>

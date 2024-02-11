@@ -23,20 +23,18 @@ import { Skeleton } from "@/components/ui/skeleton"
         </TableHeader>
         <TableBody>
           {[...Array(18).keys()].map((prop_translation_id) => (
-            <>
-              <TableRowBottomless key={prop_translation_id}>
-                  <TableCell className="font-medium">
-                    <Skeleton className="h-5 w-5 w-[90px] my-2" />
+            <TableRowBottomless key={"skeleton" + prop_translation_id}>
+                <TableCell className="font-medium">
+                  <Skeleton className="h-5 w-5 w-[90px] my-2" />
+                </TableCell>
+                <TableCell>
+                <Skeleton className="h-5 w-5 w-[145px] my-2" />
                   </TableCell>
-                  <TableCell>
-                  <Skeleton className="h-5 w-5 w-[145px] my-2" />
-                    </TableCell>
-                  <TableCell>
-                  <Skeleton className="h-5 w-5 w-[145px] my-2" />
-                  </TableCell>
+                <TableCell>
+                <Skeleton className="h-5 w-5 w-[145px] my-2" />
+                </TableCell>
 
-              </TableRowBottomless>
-            </>
+            </TableRowBottomless>
           ))}
         </TableBody>
       </Table>

@@ -13,6 +13,7 @@ import { Badge } from "../../components/ui/badge"
 import { useNavigate } from "react-router-dom";
 import { Translation } from "../../types";
 import { useWordStats } from "../../lib/word_stats";
+import React from "react";
   
   export function WordsTable(props: { translations: Translation[] }) {
     const navigate = useNavigate();
@@ -52,41 +53,41 @@ import { useWordStats } from "../../lib/word_stats";
         </TableHeader>
         <TableBody>
           {translations.map((translation) => (
-            <>
-              <TableRowBottomless key={translation.id}
-                  onClick={() => navigate(`/translation/${translation.id}`)}
-                  className="cursor-pointer"
+            <React.Fragment key={translation.id}>
+              <TableRowBottomless
+                key={translation.id}
+                onClick={() => navigate(`/translation/${translation.id}`)}
+                className="cursor-pointer"
               >
-                  <TableCell className="text-base font-medium">{translation.id}</TableCell>
-                  <TableCell className="text-base">
-                    {isHard(translation.id) && (
+                <TableCell className="text-base font-medium">{translation.id}</TableCell>
+                <TableCell className="text-base">
+                  {isHard(translation.id) && (
                     <Badge variant="destructive" className="mr-2">Hard</Badge>
-                    )}
-                    
-                    {translation.english}
-                    </TableCell>
-                  <TableCell className="text-base">{translation.german}</TableCell>
-
+                  )}
+                  {translation.english}
+                </TableCell>
+                <TableCell className="text-base">{translation.german}</TableCell>
               </TableRowBottomless>
 
-              <TableRow key={"syn" + translation.id}
-                  onClick={() => navigate(`/translation/${translation.id}`)}
-                  className="cursor-pointer"
+              <TableRow
+                key={"syn" + translation.id}
+                onClick={() => navigate(`/translation/${translation.id}`)}
+                className="cursor-pointer"
               >
-                  {hasSynonyms(translation) && (
-                    <>
-                      <TableCell></TableCell>
-                      <TableCell colSpan={2} className="py-0 pb-4">
-                        <div className="synonym-wrapper flex flex-wrap">
-                          {formatSynonyms(translation).slice(0,3).map((synonym) => (
-                            <Badge variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
-                          ))}
-                        </div>
-                      </TableCell>
-                    </>
-                  )}
+                {hasSynonyms(translation) && (
+                  <>
+                    <TableCell></TableCell>
+                    <TableCell colSpan={2} className="py-0 pb-4">
+                      <div className="synonym-wrapper flex flex-wrap">
+                        {formatSynonyms(translation).slice(0, 3).map((synonym, index) => (
+                          <Badge key={index} variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
+                        ))}
+                      </div>
+                    </TableCell>
+                  </>
+                )}
               </TableRow>
-            </>
+            </React.Fragment>
           ))}
         </TableBody>
       </Table>

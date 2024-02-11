@@ -10,7 +10,7 @@ import { Skeleton } from "../../components/ui/skeleton";
 
 import api from '../../api/axiosConfig';
 import { Translation } from "../../types";
-import { useWordStats } from "../../lib/word_stats";
+import { WordStat, useWordStats } from "../../lib/word_stats";
 import LearnPageHeader from "./LearnPageHeader";
 import FinishedLearning from "./results/FinishedLearning";
 
@@ -31,7 +31,8 @@ export default function LearnPage(props : {onlyHard: boolean}) {
   const [progress, setProgress] = useState(0);
   const [progressMax, setProgressMax] = useState(1);
 
-  const { increaseWordStat, isHard } = useWordStats();
+  const { increaseWordStat, isHard, wordStats } = useWordStats();
+  const [beforeWordStats,] = useState<WordStat[]>(wordStats.map(stat => ({...stat})));
 
   const getTranslations = async () => {
     try {
@@ -147,7 +148,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
   return (
     <AppLayout>
       {translations.length === 0 && listName ?
-      <FinishedLearning />
+      <FinishedLearning beforeWordStats={beforeWordStats} afterWordStats={wordStats} />
       :
       <>
         <LearnPageHeader listName={listName!} progress={progress} />

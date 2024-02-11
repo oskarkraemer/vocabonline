@@ -40,9 +40,27 @@ export const useWordStats = () => {
         });
     }
 
+    const getWordStatsDiff = (word_stats_a: WordStat[], word_stats_b: WordStat[]) => {
+        const word_stats_diff: WordStat[] = [];
+        for (let i = 0; i < word_stats_a.length; i++) {
+            const word_stat_a = word_stats_a[i];
+            const word_stat_b = word_stats_b.find((wordStat) => wordStat.word_id === word_stat_a.word_id);
+            if (!word_stat_b) {
+                word_stats_diff.push(word_stat_a);
+            } else {
+                const correct = word_stat_a.correct - word_stat_b.correct;
+                const incorrect = word_stat_a.incorrect - word_stat_b.incorrect;
+                if (correct > 0 || incorrect > 0) {
+                    word_stats_diff.push({ word_id: word_stat_a.word_id, correct, incorrect });
+                }
+            }
+        }
+        return word_stats_diff;
+    }
+
     useEffect(() => {
         localStorage.setItem("wordStats", JSON.stringify(wordStats));
     }, [wordStats]);
 
-    return { getWordStat, increaseWordStat, isHard };
+    return { getWordStat, wordStats, increaseWordStat, isHard, getWordStatsDiff };
 };
