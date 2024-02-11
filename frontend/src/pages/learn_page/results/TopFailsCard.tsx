@@ -15,17 +15,17 @@ export default function TopFailsCard(props: {wordStatsDiff: WordStat[]}) {
         <p className="text-3xl font-bold mb-4 pt-2">Top Fails</p>
         
         <ScrollArea className="h-80 w-full">
-        <div className="p-1">
-            {incorrectWords.map((incorrectWord) => (
-                <>
-                    <div key={incorrectWord} className="text-md">
-                        {incorrectWord}
-                    </div>
-                    <Separator className="my-2" />
-                </>
-            ))};
-        </div>
-    </ScrollArea>
+            <div className="p-1">
+                {incorrectWords.map((incorrectWord) => (
+                    <>
+                        <div key={incorrectWord} className="text-md">
+                            {incorrectWord}
+                        </div>
+                        <Separator className="my-2" />
+                    </>
+                ))};
+            </div>
+        </ScrollArea>
     </StatCard>
     )
 }
