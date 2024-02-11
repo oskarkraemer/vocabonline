@@ -1,5 +1,6 @@
 import { WordStat, useWordStats } from "@/lib/word_stats";
 import { CorrectWrongCard } from "./CorrectWrongCard";
+import TopFailsCard from "./TopFailsCard";
 
 export default function FinishedLearning(props: {beforeWordStats: WordStat[], afterWordStats: WordStat[]}) {
     const { getWordStatsDiff } = useWordStats();
@@ -15,7 +16,7 @@ export default function FinishedLearning(props: {beforeWordStats: WordStat[], af
 
             <div className="flex justify-center md:justify-normal flex-wrap">
                 <CorrectWrongCard wordStatsDiff={wordStatsDiff}/>
-                <CorrectWrongCard wordStatsDiff={wordStatsDiff}/>
+                <TopFailsCard wordStatsDiff={wordStatsDiff}/>
                 <CorrectWrongCard wordStatsDiff={wordStatsDiff}/>
             </div>
         </>
