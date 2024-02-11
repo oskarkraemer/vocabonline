@@ -1,6 +1,5 @@
 import { WordStat, useWordStats } from "@/lib/word_stats";
 import { CorrectWrongCard } from "./CorrectWrongCard";
-import { useEffect } from "react";
 
 export default function FinishedLearning(props: {beforeWordStats: WordStat[], afterWordStats: WordStat[]}) {
     const { getWordStatsDiff } = useWordStats();
