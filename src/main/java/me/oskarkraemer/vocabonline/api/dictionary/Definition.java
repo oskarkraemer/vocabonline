@@ -20,7 +20,7 @@ public class Definition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="meaning_id")
     @JsonIgnore
     private Meaning meaning;

@@ -25,7 +25,7 @@ public class Meaning {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="translation_id")
     @JsonIgnore
     private Translation translation;
