@@ -1,7 +1,9 @@
+import { Translation } from "@/types";
 import { useState, useEffect } from "react";
 
 export type WordStat = {
     word_id: number;
+    word_en: string;
     correct: number;
     incorrect: number;
 }
@@ -25,15 +27,19 @@ export const useWordStats = () => {
         return wordStat.incorrect * 2 > wordStat.correct;
     }
 
-    const increaseWordStat = (word_id: number, correct: number, incorrect: number) => {
+    const increaseWordStat = (word: Translation, correct: number, incorrect: number) => {
+        const word_id = word.id;
+        const word_en = word.english;
+
         setWordStats(prevStats => {
             const newWordStats = [...prevStats];
             let wordStat = newWordStats.find((wordStat) => wordStat.word_id === word_id);
             if (wordStat) {
                 wordStat.correct += correct;
                 wordStat.incorrect += incorrect;
+                wordStat.word_en = word_en;
             } else {
-                wordStat = { word_id, correct, incorrect };
+                wordStat = { word_id, word_en, correct, incorrect };
                 newWordStats.push(wordStat);
             }
             return newWordStats;
@@ -51,7 +57,7 @@ export const useWordStats = () => {
                 const correct = word_stat_a.correct - word_stat_b.correct;
                 const incorrect = word_stat_a.incorrect - word_stat_b.incorrect;
                 if (correct > 0 || incorrect > 0) {
-                    word_stats_diff.push({ word_id: word_stat_a.word_id, correct, incorrect });
+                    word_stats_diff.push({ word_id: word_stat_a.word_id, word_en: word_stat_a.word_en, correct, incorrect });
                 }
             }
         }

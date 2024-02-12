@@ -103,7 +103,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
     setTranslations((currentTranslations) => {
       if(knew) {
         //increase the word stat for correct
-        increaseWordStat(currentTranslation!.id, 1, 0);
+        increaseWordStat(currentTranslation!, 1, 0);
 
         //remove the current translation from the list
         newTranslations = currentTranslations.filter(translation => translation.id !== currentTranslation!.id);
@@ -112,7 +112,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
         setProgress((currentProgress) => currentProgress + (1 / progressMax * 100));
       } else {
         //increase the word stat for incorrect
-        increaseWordStat(currentTranslation!.id, 0, 1);
+        increaseWordStat(currentTranslation!, 0, 1);
 
         if(currentTranslations.length === 1) {
           //if there is only one translation left, flip it and show it again

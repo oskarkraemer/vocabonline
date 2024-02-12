@@ -1,5 +1,3 @@
-import * as React from "react"
-
 import { WordStat } from "@/lib/word_stats"
 import { StatCard } from "./StatCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -7,8 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function TopFailsCard(props: {wordStatsDiff: WordStat[]}) {
 
-    //const incorrectWords = props.wordStatsDiff.filter(stat => stat.incorrect).map(stat => stat.word_id);
-    const incorrectWords = ["Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test"];
+    const incorrectWords = props.wordStatsDiff.filter(stat => stat.incorrect);
 
     return (
     <StatCard>
@@ -18,12 +15,12 @@ export default function TopFailsCard(props: {wordStatsDiff: WordStat[]}) {
             <div className="p-1">
                 {incorrectWords.map((incorrectWord) => (
                     <>
-                        <div key={incorrectWord} className="text-md">
-                            {incorrectWord}
+                        <div key={incorrectWord.word_id} className="text-md w-full flex justify-between">
+                            <span>{incorrectWord.word_en}</span> <span className="text-destructive font-bold">{incorrectWord.incorrect}x</span>
                         </div>
                         <Separator className="my-2" />
                     </>
-                ))};
+                ))}
             </div>
         </ScrollArea>
     </StatCard>
