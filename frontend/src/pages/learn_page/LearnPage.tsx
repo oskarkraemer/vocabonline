@@ -148,7 +148,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
   return (
     <AppLayout>
       {translations.length === 0 && listName ?
-      <FinishedLearning beforeWordStats={beforeWordStats} afterWordStats={wordStats} />
+      <FinishedLearning list_id={parseInt(listId!)} beforeWordStats={beforeWordStats} afterWordStats={wordStats} />
       :
       <>
         <LearnPageHeader listName={listName!} progress={progress} />

@@ -4,24 +4,13 @@ import "./circular_progress.css";
 import { WordStat } from "@/lib/word_stats"
 import { StatCard } from "./StatCard";
 
+import { getCorrectPerc, getCorrectTotal, getWrongTotal } from "@/lib/result_utils";
+
 export function CorrectWrongCard(props: {wordStatsDiff: WordStat[]}) {
-  function getCorrectTotal() {
-    return props.wordStatsDiff.filter(stat => !stat.incorrect).length;
-  }
+  const correctTotal = getCorrectTotal(props.wordStatsDiff);
+  const wrongTotal = getWrongTotal(props.wordStatsDiff);
 
-  function getWrongTotal() {
-      let wrongTotal = 0;
-      props.wordStatsDiff.forEach(stat => {
-          wrongTotal += stat.incorrect;
-      });
-
-      return wrongTotal;
-  }
-
-  const correctTotal = getCorrectTotal();
-  const wrongTotal = getWrongTotal();
-
-  const correctPerc = correctTotal/(correctTotal + wrongTotal) * 100;
+  const correctPerc = getCorrectPerc(props.wordStatsDiff);
 
   return (
     <StatCard>

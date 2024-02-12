@@ -1,11 +1,21 @@
 import { WordStat, useWordStats } from "@/lib/word_stats";
+import { useListStats } from "@/lib/list_stats";
 import { CorrectWrongCard } from "./CorrectWrongCard";
 import TopFailsCard from "./TopFailsCard";
 
-export default function FinishedLearning(props: {beforeWordStats: WordStat[], afterWordStats: WordStat[]}) {
+import { getCorrectPerc } from "@/lib/result_utils";
+import { useEffect } from "react";
+
+export default function FinishedLearning(props: {list_id: number, beforeWordStats: WordStat[], afterWordStats: WordStat[]}) {
     const { getWordStatsDiff } = useWordStats();
+    const { addListScore } = useListStats();
 
     const wordStatsDiff = getWordStatsDiff(props.afterWordStats, props.beforeWordStats);
+
+    useEffect(() => {
+        //Report the results
+        addListScore(props.list_id, getCorrectPerc(wordStatsDiff));
+    }, []);
 
     return (
         <>
