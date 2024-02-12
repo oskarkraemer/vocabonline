@@ -16,7 +16,7 @@ export default function TopFailsCard(props: {wordStatsDiff: WordStat[]}) {
                 {incorrectWords.map((incorrectWord) => (
                     <>
                         <div key={incorrectWord.word_id} className="text-md w-full flex justify-between">
-                            <span>{incorrectWord.word_en}</span> <span className="text-destructive font-bold">{incorrectWord.incorrect}x</span>
+                            <span>{incorrectWord.word_en}</span> <span className="text-destructive font-bold mr-2">{incorrectWord.incorrect}x</span>
                         </div>
                         <Separator className="my-2" />
                     </>
