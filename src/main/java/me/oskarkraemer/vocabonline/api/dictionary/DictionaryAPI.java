@@ -3,6 +3,7 @@ package me.oskarkraemer.vocabonline.api.dictionary;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.oskarkraemer.vocabonline.api.WordCleaner;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -24,9 +25,10 @@ public class DictionaryAPI {
         String result;
 
         try {
-            ResponseEntity<String> resultEntity = restTemplate.exchange(BASE_URL + english_word, HttpMethod.GET, entity, String.class);
+            ResponseEntity<String> resultEntity = restTemplate.exchange(BASE_URL + WordCleaner.reduceDown(english_word), HttpMethod.GET, entity, String.class);
             result = resultEntity.getBody();
         } catch (HttpClientErrorException e) {
+            System.out.println(e);
             return Optional.empty();
         }
 
@@ -34,6 +36,7 @@ public class DictionaryAPI {
         try {
             return Optional.of(mapper.readValue(result, DictionaryAPIResult[].class)[0]);
         } catch (JsonProcessingException e) {
+            System.out.println("json: " + e);
             return Optional.empty();
         }
     }

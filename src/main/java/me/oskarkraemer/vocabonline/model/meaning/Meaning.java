@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.oskarkraemer.vocabonline.api.bht.BhtAPI;
+import me.oskarkraemer.vocabonline.api.dictionary.Definition;
 import me.oskarkraemer.vocabonline.model.translation.Translation;
 
 import java.util.List;
@@ -33,8 +34,10 @@ public class Meaning {
     @JsonProperty
     public String partOfSpeech;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "meaning", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column
-    public List<String> definitions;
+    @JsonProperty
+    public List<Definition> definitions;
 
     @Column
     @JsonProperty

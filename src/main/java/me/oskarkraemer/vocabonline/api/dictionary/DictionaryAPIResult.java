@@ -1,5 +1,6 @@
 package me.oskarkraemer.vocabonline.api.dictionary;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import me.oskarkraemer.vocabonline.model.meaning.Meaning;
 
@@ -12,7 +13,7 @@ public class DictionaryAPIResult
     public String word;
 
     @JsonProperty
-    public Phonetics[] phonetics;
+    public List<Phonetics> phonetics;
 
     @JsonProperty
     public List<Meaning> meanings = new ArrayList<>();

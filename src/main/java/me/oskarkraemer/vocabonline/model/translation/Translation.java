@@ -34,6 +34,12 @@ public class Translation {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "translation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meaning> meanings;
 
+    @Column
+    private String ipa;
+
+    @Column
+    private String audio_url;
+
     @JoinColumn(name = "word_list_id")
     @ManyToOne(cascade = CascadeType.REMOVE)
     private WordList wordList;
