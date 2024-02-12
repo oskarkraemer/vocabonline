@@ -3,6 +3,7 @@ package me.oskarkraemer.vocabonline.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.oskarkraemer.vocabonline.api.bht.BhtAPI;
+import me.oskarkraemer.vocabonline.api.dictionary.Definition;
 import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPI;
 import me.oskarkraemer.vocabonline.api.dictionary.DictionaryAPIResult;
 import me.oskarkraemer.vocabonline.model.meaning.Meaning;
@@ -13,6 +14,24 @@ import java.util.List;
 import java.util.Optional;
 
 public class MeaningFactory {
+
+    private static void setDefinitionReference(List<Meaning> meanings) {
+        for(int i = 0; i < meanings.size(); i++) {
+            Meaning meaning = meanings.get(i);
+            if(meaning.definitions == null) continue;
+
+            List<Definition> newDefinitions = new ArrayList<>();
+
+            for(int y = 0; y < meaning.definitions.size(); y++) {
+                Definition definition = meaning.definitions.get(y);
+                definition.setMeaning(meaning);
+                newDefinitions.add(definition);
+            }
+
+            meaning.definitions = newDefinitions;
+            meanings.set(i, meaning);
+        }
+    }
 
     public static List<Meaning> createFor(Translation refrenced_translation, String bhtKey) throws JsonProcessingException {
         return createFor(refrenced_translation, bhtKey, DictionaryAPI.getEntry(refrenced_translation.getEnglish()));
@@ -50,6 +69,8 @@ public class MeaningFactory {
                     }
                 }
 
+                setDefinitionReference(filledMeanings);
+
                 return filledMeanings;
             }
         }
@@ -60,6 +81,9 @@ public class MeaningFactory {
         for(Meaning meaning : meanings) {
             meaning.setTranslation(refrenced_translation);
         }
+
+        setDefinitionReference(meanings);
+
         return meanings;
     }
 }

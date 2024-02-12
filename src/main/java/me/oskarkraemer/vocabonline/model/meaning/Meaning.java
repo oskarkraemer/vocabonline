@@ -35,7 +35,7 @@ public class Meaning {
     public String partOfSpeech;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "meaning", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column
+    @Column(name = "definitions")
     @JsonProperty
     public List<Definition> definitions;
 

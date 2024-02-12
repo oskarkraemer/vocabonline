@@ -85,7 +85,7 @@ public class ImporterService {
             System.out.println("After menaing factory");
             if(m != null) {
                 meanings.addAll(m);
-                t.setMeanings(meanings);
+                t.setMeanings(m);
             } else {
                 t.setMeanings(new ArrayList<>());
             }
