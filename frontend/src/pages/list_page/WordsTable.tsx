@@ -21,21 +21,24 @@ import React from "react";
 
     const translations = props.translations;
 
-    function hasSynonyms(translation: Translation): boolean {
-      return translation.meanings.length > 0 && translation.meanings[0].synonyms !== null;
+    function hasMeanings(translation: Translation): boolean {
+      return translation.meanings.length > 0;
     }
 
     function formatSynonyms(translation: Translation): string[] {
-      if (!hasSynonyms(translation)){
+      if (!hasMeanings(translation)){
         return [];
       }
       
       let synonyms: string[] = [];
       translation.meanings.map((meaning) => {
         //add meaning.part_of_speech to every synonym
-        meaning.synonyms.map((synonym) => {
-          synonyms.push(meaning.partOfSpeech + ": " + (meaning.partOfSpeech=="verb" ? "to ": "") + synonym);
-        });
+
+        if(meaning.synonyms != null) {
+          meaning.synonyms.map((synonym) => {
+            synonyms.push(meaning.partOfSpeech + ": " + (meaning.partOfSpeech=="verb" ? "to ": "") + synonym);
+          });
+        }
       });
 
       return synonyms;
@@ -74,7 +77,7 @@ import React from "react";
                 onClick={() => navigate(`/translation/${translation.id}`)}
                 className="cursor-pointer"
               >
-                {hasSynonyms(translation) && (
+                {hasMeanings(translation) && (
                   <>
                     <TableCell></TableCell>
                     <TableCell colSpan={2} className="py-0 pb-4">
