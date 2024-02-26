@@ -14,6 +14,8 @@ export default function TopFailsCard(props: {wordStatsDiff: WordStat[]}) {
         
         <ScrollArea className="h-80 w-full">
             <div className="p-1">
+                {incorrectWords.length === 0 && <p className="text-center">You did not get any word wrong.</p>}
+
                 {incorrectWords.map((incorrectWord) => (
                     <React.Fragment key={incorrectWord.word_id}>
                         <div className="text-md w-full flex justify-between">
