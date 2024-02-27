@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine
+FROM --platform=$TARGETPLATFORM openjdk:17-jdk-alpine
 MAINTAINER oskarkraemer
 
 VOLUME /tmp
