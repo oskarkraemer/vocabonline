@@ -23,7 +23,7 @@ export const useListStats = () => {
         setListStats({...listStats});
     }
 
-    const getGlobalAverage = () => {
+    /*const getGlobalAverage = () => {
         let sum = 0;
         let count = 0;
 
@@ -51,7 +51,7 @@ export const useListStats = () => {
         });
 
         return sum / count;
-    }
+    }*/
 
     useEffect(() => {
         localStorage.setItem("listStats", JSON.stringify(listStats));
