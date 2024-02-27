@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+    vocabonline-backend:
+        container_name: vocabonline-backend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: vocabonline:latest
+        environment:
+          - SPRING_DATASOURCE_URL=${DB_URL}
+          - SPRING_DATASOURCE_USERNAME=${DB_USER}
+          - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+
+          - BHT_APIKEY=${BHT_API_KEY}
+        ports:
+            - 13337:8080
