@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM openjdk:17-jdk-alpine
+FROM --platform=$TARGETPLATFORM amazoncorretto:17
 MAINTAINER oskarkraemer
 
 VOLUME /tmp
