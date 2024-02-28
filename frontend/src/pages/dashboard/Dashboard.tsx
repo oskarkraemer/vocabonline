@@ -30,7 +30,7 @@ export default function Dashboard() {
   return (
     <AppLayout>
         <nav>
-            <h1>Vocab Online</h1>
+            <h1>Vocabulary sets</h1>
             <p>Under construction</p>
         </nav>
 
