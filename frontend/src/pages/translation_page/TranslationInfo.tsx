@@ -16,7 +16,7 @@ export default function TranslationInfo(props: { translation: Translation}) {
             <div className="flex items-center space-x-2">
               <ul className="list-decimal">
                 {props.translation.meanings && props.translation.meanings.map((meaning, index) => (
-                    <li key={index} className="pl-3 ml-7 mb-7">
+                    <li key={index} className="pl-3 ml-2 sm:ml-7 mb-7">
                         <p className="font-bold">{meaning.partOfSpeech}</p>
 
                         {meaning.synonyms && (
@@ -36,7 +36,7 @@ export default function TranslationInfo(props: { translation: Translation}) {
                         {meaning.definitions.length > 0 && <p>Definitions: </p>}
                         <ul className="list-disc">
                             {meaning.definitions.map((definition, index) => (
-                                <li key={index} className="ml-7">
+                                <li key={index} className="ml-4 sm:ml-7">
                                     <p>{definition.definition}</p>
                                     {definition.example && <p className="ml-3 text-gray-400 mt-0">Example: {definition.example}</p>}
                                 </li>
