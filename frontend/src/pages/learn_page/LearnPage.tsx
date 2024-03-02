@@ -156,7 +156,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
         <LearnPageHeader listName={listName!} progress={progress} />
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
-          <p className="text-4xl select-none mb-1">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
+          <p className="text-3xl sm:text-4xl text-center select-none mb-1">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
           {currentTranslation && hasMeanings(currentTranslation) && (
             <div className="synonym-wrapper flex flex-wrap justify-center">
               {formatSynonyms(currentTranslation).slice(0, 3).map((synonym, index) => (
