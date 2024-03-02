@@ -21,7 +21,7 @@ export default function ListPage() {
 
   const getTranslations = async () => {
     try {
-      return await api.get(`/api/v1/translations/${listId}`).then((response) => {
+      return await api.get(`/api/v1/list_translations/${listId}`).then((response) => {
         console.log("Fetched translations:");
         console.log(response.data);
 
