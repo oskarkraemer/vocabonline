@@ -5,6 +5,7 @@ import Dashboard from './pages/dashboard/Dashboard.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ListPage from './pages/list_page/ListPage.tsx'
 import LearnPage from './pages/learn_page/LearnPage.tsx'
+import TranslationPage from './pages/translation_page/TranslationPage.tsx'
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
         <Route path="/learnList/:listId" element={<LearnPage onlyHard={false} />} />
         <Route path="/learnListHard/:listId" element={<LearnPage onlyHard={true} />} />
 
-        <Route path='/translation/:translationId' element={<div>Translation: WIP</div>} />
+        <Route path='/translation/:translationId' element={<TranslationPage />} />
       </Routes>
     </BrowserRouter>
   )

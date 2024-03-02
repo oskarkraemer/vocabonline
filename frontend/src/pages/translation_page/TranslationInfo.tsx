@@ -1,13 +1,16 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Translation } from "@/types";
 import SynonymAntonymBadges from "./SynonymAntonymBadges";
 
 export default function TranslationInfo(props: { translation: Translation}) {
+    if(!props.translation) {
+        return null;
+    }
+
     return (
         <Card className="w-full mt-5">
           <CardHeader>
             <CardTitle>Translation info</CardTitle>
-            <CardDescription>View information about the current translation.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center space-x-2">
