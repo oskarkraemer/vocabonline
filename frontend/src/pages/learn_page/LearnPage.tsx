@@ -157,7 +157,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
           <p className="text-3xl sm:text-4xl text-center select-none mb-1">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
-          {currentTranslation && hasMeanings(currentTranslation) && (
+          {currentTranslation && flipped && hasMeanings(currentTranslation) && (
             <div className="synonym-wrapper flex flex-wrap justify-center">
               {formatSynonyms(currentTranslation).slice(0, 3).map((synonym, index) => (
                 <Badge key={index} variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
@@ -179,7 +179,7 @@ export default function LearnPage(props : {onlyHard: boolean}) {
 
           {/* Add some space if the card is not flipped */}
           {!flipped && (
-            <div className="w-full py-9" />
+            <div className="w-full py-[49px]" />
           )}
         </Card>
 
