@@ -15,6 +15,8 @@ import LearnPageHeader from "./LearnPageHeader";
 import FinishedLearning from "./results/FinishedLearning";
 import { Badge } from "@/components/ui/badge";
 import { formatSynonyms, hasMeanings } from "@/lib/word_utils";
+import TranslationInfo from "../translation_page/TranslationInfo";
+import SynonymAntonymBadges from "../translation_page/SynonymAntonymBadges";
 
 export default function LearnPage(props : {onlyHard: boolean}) {
 
@@ -165,21 +167,15 @@ export default function LearnPage(props : {onlyHard: boolean}) {
 
           {flipped && (
             <>
-              {currentTranslation && hasMeanings(currentTranslation) && (
-                <div className="synonym-wrapper flex flex-wrap justify-center">
-                  {formatSynonyms(currentTranslation).slice(0, 3).map((synonym, index) => (
-                    <Badge key={index} variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
-                  ))}
-                </div>
-              )}
+              <SynonymAntonymBadges translation={currentTranslation!} type="synonym" center={true} />
 
-              <div className="flex flex-row justify-center justify-self-end gap-4 w-full">
-                <Button onClick={() => handleAwnser(true)} className="mt-6 w-[100px] py-6">
-                  <CheckIcon className="w-7 h-7" />
-                </Button>
-
+              <div className="flex flex-row justify-center justify-self-end gap-4 w-full"> 
                 <Button onClick={() => handleAwnser(false)} className="mt-6 w-[100px] py-6">
                   <Cross1Icon className="w-6 h-6" />
+                </Button>
+
+                <Button onClick={() => handleAwnser(true)} className="mt-6 w-[100px] py-6">
+                  <CheckIcon className="w-7 h-7" />
                 </Button>
               </div>
             </>
@@ -190,6 +186,8 @@ export default function LearnPage(props : {onlyHard: boolean}) {
             <div className="w-full py-[49px]" />
           )}
         </Card>
+
+        {currentTranslation && <TranslationInfo translation={currentTranslation} />}
 
         <Card className="w-full mt-5">
           <CardHeader>

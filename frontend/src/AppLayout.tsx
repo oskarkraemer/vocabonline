@@ -8,13 +8,15 @@ import { ReactNode } from "react";
 export default function AppLayout({ children }: { children: ReactNode }) {
   
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <Navbar />
-        <main>
-            {children}
-        </main>
+    <div style={{paddingLeft: "calc(100vw - 100%)"}}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <Navbar />
+          <main>
+              {children}
+          </main>
 
-        <Footer />
-    </ThemeProvider>
+          <Footer />
+      </ThemeProvider>
+    </div>
   )
 }

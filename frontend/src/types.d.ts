@@ -5,16 +5,6 @@ export type List = {
     created: Date;
 }
 
-type Meaning = {
-    id: number;
-    translation_id: number;
-    partOfSpeech: string;
-
-    synonyms: string[];
-    antonyms: string[];
-    definition: string[];
-}
-
 type Translation = {
     id: number;
     english: string;
@@ -22,3 +12,19 @@ type Translation = {
     wordList: List;
     meanings: Meaning[];
   }
+
+type Meaning = {
+    id: number;
+    translation_id: number;
+    partOfSpeech: string;
+
+    synonyms: string[];
+    antonyms: string[];
+    definitions: Definition[];
+}
+
+type Definition = {
+    id: number;
+    definition: string;
+    example: string;
+}

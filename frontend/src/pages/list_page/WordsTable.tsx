@@ -15,6 +15,7 @@ import { Translation } from "../../types";
 import { useWordStats } from "../../lib/word_stats";
 import React from "react";
 import { formatSynonyms, hasMeanings } from "@/lib/word_utils";
+import SynonymAntonymBadges from "../translation_page/SynonymAntonymBadges";
   
   export function WordsTable(props: { translations: Translation[] }) {
     const navigate = useNavigate();
@@ -59,11 +60,7 @@ import { formatSynonyms, hasMeanings } from "@/lib/word_utils";
                   <>
                     <TableCell></TableCell>
                     <TableCell colSpan={2} className="py-0 pb-4">
-                      <div className="synonym-wrapper flex flex-wrap">
-                        {formatSynonyms(translation).slice(0, 3).map((synonym, index) => (
-                          <Badge key={index} variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
-                        ))}
-                      </div>
+                      <SynonymAntonymBadges translation={translation} type="synonym"/>
                     </TableCell>
                   </>
                 )}
