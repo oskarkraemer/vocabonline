@@ -74,13 +74,16 @@ export default function LearnPage(props : {onlyHard: boolean}) {
       setTranslations(shuffeled);
 
       setCurrentTranslation(shuffeled[0]);
+      handleFlip(false, shuffeled[0]);
 
       console.log(shuffeled);
     });
   }, []);
 
-  function handleFlip(flipped: boolean) {
-    if(currentTranslation)
+  function handleFlip(flipped: boolean, newTranslation?: Translation) {
+    if(flipped === false && !newTranslation) {
+      throw new Error("You need to provide a new translation to show when flipping the card back.");
+    }
 
     setFlipped(flipped);
 
@@ -92,9 +95,9 @@ export default function LearnPage(props : {onlyHard: boolean}) {
       }
     } else {
       if(englishFirst) {
-        setWordShown(currentTranslation!.english);
+        setWordShown(newTranslation!.english);
       } else {
-        setWordShown(currentTranslation!.german);
+        setWordShown(newTranslation!.german);
       }
     }
   }
@@ -133,6 +136,8 @@ export default function LearnPage(props : {onlyHard: boolean}) {
       setTranslations(newTranslations);
 
       if(newTranslations.length > 0) {
+        handleFlip(false, newTranslations[0]);
+
         //set the current translation
         setCurrentTranslation(newTranslations[0]);
       }
@@ -144,8 +149,8 @@ export default function LearnPage(props : {onlyHard: boolean}) {
   useEffect(() => {
     if(!currentTranslation) return;
 
-    handleFlip(false);
-  }, [currentTranslation, englishFirst]);
+    handleFlip(false, currentTranslation);
+  }, [englishFirst]);
   
   return (
     <AppLayout>
@@ -157,24 +162,27 @@ export default function LearnPage(props : {onlyHard: boolean}) {
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
           <p className="text-3xl sm:text-4xl text-center select-none mb-1">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
-          {currentTranslation && flipped && hasMeanings(currentTranslation) && (
-            <div className="synonym-wrapper flex flex-wrap justify-center">
-              {formatSynonyms(currentTranslation).slice(0, 3).map((synonym, index) => (
-                <Badge key={index} variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
-              ))}
-            </div>
-          )}
 
           {flipped && (
-            <div className="flex flex-row justify-center justify-self-end gap-4 w-full">
-              <Button onClick={() => handleAwnser(true)} className="mt-6 w-[100px] py-6">
-                <CheckIcon className="w-7 h-7" />
-              </Button>
+            <>
+              {currentTranslation && hasMeanings(currentTranslation) && (
+                <div className="synonym-wrapper flex flex-wrap justify-center">
+                  {formatSynonyms(currentTranslation).slice(0, 3).map((synonym, index) => (
+                    <Badge key={index} variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
+                  ))}
+                </div>
+              )}
 
-              <Button onClick={() => handleAwnser(false)} className="mt-6 w-[100px] py-6">
-                <Cross1Icon className="w-6 h-6" />
-              </Button>
-            </div>
+              <div className="flex flex-row justify-center justify-self-end gap-4 w-full">
+                <Button onClick={() => handleAwnser(true)} className="mt-6 w-[100px] py-6">
+                  <CheckIcon className="w-7 h-7" />
+                </Button>
+
+                <Button onClick={() => handleAwnser(false)} className="mt-6 w-[100px] py-6">
+                  <Cross1Icon className="w-6 h-6" />
+                </Button>
+              </div>
+            </>
           )}
 
           {/* Add some space if the card is not flipped */}
