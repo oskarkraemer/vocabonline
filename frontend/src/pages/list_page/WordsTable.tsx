@@ -14,35 +14,13 @@ import { useNavigate } from "react-router-dom";
 import { Translation } from "../../types";
 import { useWordStats } from "../../lib/word_stats";
 import React from "react";
+import { formatSynonyms, hasMeanings } from "@/lib/word_utils";
   
   export function WordsTable(props: { translations: Translation[] }) {
     const navigate = useNavigate();
     const { isHard } = useWordStats();
 
     const translations = props.translations;
-
-    function hasMeanings(translation: Translation): boolean {
-      return translation.meanings.length > 0;
-    }
-
-    function formatSynonyms(translation: Translation): string[] {
-      if (!hasMeanings(translation)){
-        return [];
-      }
-      
-      let synonyms: string[] = [];
-      translation.meanings.map((meaning) => {
-        //add meaning.part_of_speech to every synonym
-
-        if(meaning.synonyms != null) {
-          meaning.synonyms.map((synonym) => {
-            synonyms.push(meaning.partOfSpeech + ": " + (meaning.partOfSpeech=="verb" ? "to ": "") + synonym);
-          });
-        }
-      });
-
-      return synonyms;
-    }
 
     return (
       <Table>

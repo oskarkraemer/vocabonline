@@ -13,6 +13,8 @@ import { Translation } from "../../types";
 import { WordStat, useWordStats } from "../../lib/word_stats";
 import LearnPageHeader from "./LearnPageHeader";
 import FinishedLearning from "./results/FinishedLearning";
+import { Badge } from "@/components/ui/badge";
+import { formatSynonyms, hasMeanings } from "@/lib/word_utils";
 
 export default function LearnPage(props : {onlyHard: boolean}) {
 
@@ -154,7 +156,14 @@ export default function LearnPage(props : {onlyHard: boolean}) {
         <LearnPageHeader listName={listName!} progress={progress} />
 
         <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-44 cursor-pointer">
-          <p className="text-4xl select-none">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
+          <p className="text-4xl select-none mb-1">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
+          {currentTranslation && hasMeanings(currentTranslation) && (
+            <div className="synonym-wrapper flex flex-wrap justify-center">
+              {formatSynonyms(currentTranslation).slice(0, 3).map((synonym, index) => (
+                <Badge key={index} variant="secondary" className="mr-1 mt-1">{synonym}</Badge>
+              ))}
+            </div>
+          )}
 
           {flipped && (
             <div className="flex flex-row justify-center justify-self-end gap-4 w-full">
