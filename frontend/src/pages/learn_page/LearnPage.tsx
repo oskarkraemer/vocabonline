@@ -13,8 +13,6 @@ import { Translation } from "../../types";
 import { WordStat, useWordStats } from "../../lib/word_stats";
 import LearnPageHeader from "./LearnPageHeader";
 import FinishedLearning from "./results/FinishedLearning";
-import { Badge } from "@/components/ui/badge";
-import { formatSynonyms, hasMeanings } from "@/lib/word_utils";
 import TranslationInfo from "../translation_page/TranslationInfo";
 import SynonymAntonymBadges from "../translation_page/SynonymAntonymBadges";
 

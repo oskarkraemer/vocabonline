@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { Translation } from "../../types";
 import { useWordStats } from "../../lib/word_stats";
 import React from "react";
-import { formatSynonyms, hasMeanings } from "@/lib/word_utils";
+import { hasMeanings } from "@/lib/word_utils";
 import SynonymAntonymBadges from "../translation_page/SynonymAntonymBadges";
   
   export function WordsTable(props: { translations: Translation[] }) {
