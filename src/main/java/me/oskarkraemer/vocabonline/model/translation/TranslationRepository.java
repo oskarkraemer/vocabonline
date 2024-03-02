@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface TranslationRepository extends JpaRepository<Translation, Long> {
     Optional<List<Translation>> findByWordListId(long listId);
+
+    Optional<Translation> findById(long translationId);
 }

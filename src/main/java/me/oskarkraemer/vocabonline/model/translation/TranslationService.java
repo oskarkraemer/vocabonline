@@ -15,6 +15,10 @@ public class TranslationService {
         return translationRepository.findAll();
     }
 
+    public Optional<Translation> singleTranslation(long translationId) {
+        return translationRepository.findById(translationId);
+    }
+
     public Optional<List<Translation>> translationsOfList(long listId) {
         return translationRepository.findByWordListId(listId);
     }

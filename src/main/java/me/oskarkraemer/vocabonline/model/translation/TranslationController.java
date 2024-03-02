@@ -1,5 +1,6 @@
 package me.oskarkraemer.vocabonline.model.translation;
 
+import me.oskarkraemer.vocabonline.model.list.WordList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,8 @@ public class TranslationController {
         return new ResponseEntity<List<Translation>>(translationService.allTranslations(), HttpStatus.OK);
     }
 
-    @GetMapping("/{listId}")
-    private ResponseEntity<Optional<List<Translation>>> getTranslationsOfList(@PathVariable long listId) {
-        return new ResponseEntity<Optional<List<Translation>>>(translationService.translationsOfList(listId), HttpStatus.OK);
+    @GetMapping("/{translation_id}")
+    public ResponseEntity<Optional<Translation>> getSingleTranslation(@PathVariable long translation_id) {
+        return new ResponseEntity<Optional<Translation>>(translationService.singleTranslation(translation_id), HttpStatus.OK);
     }
 }
