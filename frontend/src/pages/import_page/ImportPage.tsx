@@ -40,7 +40,7 @@ export default function ImportPage() {
     async function submitUpload(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        console.log(file, listName, username, password);
+        console.log(file, listName, username);
 
         if (file) {
             const formData = new FormData();
