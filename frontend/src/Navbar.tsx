@@ -13,7 +13,7 @@ export function Navbar() {
                 <h1 className="text-lg font-semibold tracking-wide inline">vokabeλ</h1>
             </a>
             
-            <a href="#" className="m-0 ml-8 text-foreground/60 hover:text-foreground/80">Test</a>
+            <a href="/import" className="m-0 ml-8 text-foreground/60 hover:text-foreground/80">Import PDF</a>
         </nav>
     )
 }
