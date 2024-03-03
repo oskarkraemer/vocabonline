@@ -5,7 +5,6 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-    TableRowBottomless,
   } from "@/components/ui/table"
 
 import { Skeleton } from "@/components/ui/skeleton"
@@ -23,7 +22,7 @@ import { Skeleton } from "@/components/ui/skeleton"
         </TableHeader>
         <TableBody>
           {[...Array(18).keys()].map((prop_translation_id) => (
-            <TableRowBottomless key={"skeleton" + prop_translation_id}>
+            <TableRow key={"skeleton" + prop_translation_id} className="border-b-0">
                 <TableCell className="font-medium">
                   <Skeleton className="h-5 w-5 w-[90px] my-2" />
                 </TableCell>
@@ -34,7 +33,7 @@ import { Skeleton } from "@/components/ui/skeleton"
                 <Skeleton className="h-5 w-5 w-[145px] my-2" />
                 </TableCell>
 
-            </TableRowBottomless>
+            </TableRow>
           ))}
         </TableBody>
       </Table>
