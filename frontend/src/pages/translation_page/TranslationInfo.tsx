@@ -22,14 +22,14 @@ export default function TranslationInfo(props: { translation: Translation}) {
                         {meaning.synonyms && (
                             <div className="mb-4">
                                 <p>Synonyms</p>
-                                <SynonymAntonymBadges translation={props.translation} type={"synonym"} />
+                                <SynonymAntonymBadges translation={props.translation} type={"synonym"} truncateTo={15}/>
                             </div>
                         )}
 
                         {meaning.antonyms && (
                             <div className="mb-4">
                                 <p>Antonyms</p>
-                                <SynonymAntonymBadges translation={props.translation} type={"antonym"} />
+                                <SynonymAntonymBadges translation={props.translation} type={"antonym"} truncateTo={15}/>
                             </div>
                         )}
 
