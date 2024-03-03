@@ -13,5 +13,6 @@ services:
           - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
 
           - BHT_APIKEY=${BHT_API_KEY}
+          - AUTH_SALT=${AUTH_SALT}
         ports:
             - 13337:8080
