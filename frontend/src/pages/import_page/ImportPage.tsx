@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LoadingSpinner from "@/components/ui/loading-spinner";
-import { Axios, AxiosError } from "axios";
+import { AxiosError } from "axios";
 
 export default function ImportPage() {
     const [file, setFile] = useState<File | null>(null);
