@@ -160,12 +160,14 @@ export default function LearnPage(props : {onlyHard: boolean}) {
       <>
         <LearnPageHeader listName={listName!} progress={progress} />
 
-        <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-16 md:py-24 2xl:py-40 cursor-pointer">
+        <Card onClick={() => {if(!flipped) {handleFlip(true)}}} className="flex flex-col items-center w-full mt-5 py-20 px-4 md:py-24 2xl:py-40 cursor-pointer">
           <p className="text-3xl sm:text-4xl text-center select-none mb-1">{wordShown || <Skeleton className="h-10 w-[210px]"/>}</p>
 
           {flipped && (
             <>
-              <SynonymAntonymBadges translation={currentTranslation!} type="synonym" center={true} />
+              <div className="min-h-[26px]">
+                <SynonymAntonymBadges translation={currentTranslation!} type="synonym" center={true} />
+              </div>
 
               <div className="flex flex-row justify-center justify-self-end gap-4 w-full"> 
                 <Button onClick={() => handleAwnser(false)} className="mt-6 w-[100px] py-6">

@@ -18,7 +18,7 @@ export default function SynonymAntonymBadges(props: { translation: Translation, 
     }
 
     return (
-      <div className={"synonym-wrapper flex flex-wrap " + (props.center ? 'justify-center' : '')}>
+      <div className={"synonym-wrapper flex flex-wrap" + (props.center ? 'justify-center' : '')}>
         {formatSynAnts().slice(0, truncateTo).map((synAnt, index) => (
           <Badge key={index} variant="secondary" className="mr-1 mt-1">{synAnt}</Badge>
         ))}
